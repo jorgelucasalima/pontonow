@@ -3,6 +3,14 @@ import { createGlobalStyle } from "styled-components";
 
 const EstiloGlobal = createGlobalStyle`
 
+  :root {
+    --laranga-button: #FA9746;
+    --fundo: #EAF3FA;
+    --fundo-header: #FFFFFF;
+    --texto: #78788F;
+
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -24,6 +32,23 @@ const EstiloGlobal = createGlobalStyle`
 
   body {
     font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4, h5, h6, strong {
+    font-weight: 700;
+  }
+
+  p {
+    font-weight: 100;
+  }
+
+  button {
+    cursor: pointer;
+  }
+  [disabled] {
+    opacity: 8.6;
+    cursor: not-allowed;
   }
 
 
