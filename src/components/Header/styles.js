@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 1120px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  background: var(--fundo-header);
+  background: var(--laranga-button);
+  padding: 3rem 3rem;
 `;
 
 export const Content = styled.div`
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 1rem 1rem 2rem;
 `
