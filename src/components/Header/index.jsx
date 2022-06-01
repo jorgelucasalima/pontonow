@@ -4,8 +4,8 @@ export function Header() {
   return (
     <Container>
       <Content>
-        <a href="">LOGO</a>
-        <h4>Nome Funcionário</h4>
+        <a href="">LOGO - Ponto Now</a>
+        <p>Nome Funcionário</p>
       </Content>
     </Container>
   )

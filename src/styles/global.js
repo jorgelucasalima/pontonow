@@ -40,7 +40,7 @@ const EstiloGlobal = createGlobalStyle`
   }
 
   p {
-    font-weight: 100;
+    font-weight: 300;
   }
 
   button {
