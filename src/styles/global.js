@@ -8,6 +8,7 @@ const EstiloGlobal = createGlobalStyle`
     --fundo: #EAF3FA;
     --fundo-header: #FFFFFF;
     --texto: #78788F;
+    --texto-escuro: #58586B;
 
   }
 
@@ -33,6 +34,7 @@ const EstiloGlobal = createGlobalStyle`
   body {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
+    background: var(--fundo);
   }
 
   h1, h2, h3, h4, h5, h6, strong {
