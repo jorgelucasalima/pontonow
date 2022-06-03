@@ -13,7 +13,7 @@ export function BodyPonto() {
       <ContentBatida>
         <h1>08:00:01</h1>
         <button>Registrar Ponto</button>
-        <img src="" alt="" />
+        <a href=""></a>
       </ContentBatida>
 
       <ContentRegistrosDia>

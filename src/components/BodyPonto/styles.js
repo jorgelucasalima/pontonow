@@ -21,6 +21,10 @@ export const ContentBatida = styled.div`
   margin-top: 2rem;
   padding: 5rem;
   border-radius: 0.25rem;
+
+  h1 {
+    font-size: 3rem;
+  }
   
 
   button {
