@@ -17,6 +17,7 @@ export function BodyPonto(props) {
   }
 
 
+
   return(
     <Container>
       <ModalBatidaPonto isOpen={isModalBatidaPontoOpen} onRequestClose={fecharModalBatidaPonto}/>
@@ -26,7 +27,7 @@ export function BodyPonto(props) {
       </ContentTexto>
       
       <ContentBatida>
-        <h1>08:00:01</h1>
+        <h1>as</h1>
         <button onClick={abrirModalBatidaPonto}>Registrar Ponto</button>
         <a href=""></a>
       </ContentBatida>

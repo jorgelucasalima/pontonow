@@ -10,6 +10,3 @@ export const Content = styled.div`
   align-items: center;
   justify-content: space-between;
 `
-
-//atualizar cor de fundo
-//atualizar cor do texto
