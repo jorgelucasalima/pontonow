@@ -1,5 +1,6 @@
 import {Container} from './styles'
 import Modal from 'react-modal'
+import { Link } from 'react-router-dom'
 
 
 
@@ -8,15 +9,14 @@ export function ModalBatidaPonto(props) {
     <Modal
       isOpen={props.isOpen}
       onRequestClose={props.onRequestClose}
-      overlayClassName="Overlay"
-      className="Modal"
+      overlayClassName="react-modal-overlay"
+      className="eact-modal-content"
     >
       <Container>
         <h2>Confirme seu registro!</h2>
-        <p>Você está prestes a registrar seu ponto de acordo com o horário do seu computador.</p>
         <strong>08:00:01</strong>
         <p>12 de agosto de 1994</p>
-        <button>Cancelar</button>
+        <button className='cancelar' onClick={props.onRequestClose}>Cancelar</button>
         <button>Registrar</button>
       </Container>
     </Modal>

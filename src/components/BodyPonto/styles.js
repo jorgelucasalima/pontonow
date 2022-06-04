@@ -40,11 +40,6 @@ export const ContentBatida = styled.div`
     &:hover {
       filter: brightness(0.9);
     }
-
-    img {
-      height: 1rem;
-      width: 1rem;
-    }
   }
 `
 
