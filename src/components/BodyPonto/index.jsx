@@ -1,10 +1,25 @@
 import {Container, ContentTexto, ContentBatida, ContentRegistrosDia} from './styles'
 import front from '../../assets/front.jpg'
 import { FiCheckCircle } from "react-icons/fi";
+import { ModalBatidaPonto } from '../ModalBatidaPonto';
+import { useState } from 'react';
 
-export function BodyPonto() {
+export function BodyPonto(props) {
+
+  const [isModalBatidaPontoOpen, setIsModalBatidaPontoOpen] = useState(false);
+
+  function abrirModalBatidaPonto() {
+    setIsModalBatidaPontoOpen(true);
+  }
+
+  function fecharModalBatidaPonto() {
+    setIsModalBatidaPontoOpen(false);
+  }
+
+
   return(
     <Container>
+      <ModalBatidaPonto isOpen={isModalBatidaPontoOpen} onRequestClose={fecharModalBatidaPonto}/>
       <ContentTexto>
         <h1>Bem vindo ao Ponto Now</h1>
         <p>Registre seu ponto de acordo o horário do seu computador.</p>
@@ -12,7 +27,7 @@ export function BodyPonto() {
       
       <ContentBatida>
         <h1>08:00:01</h1>
-        <button>Registrar Ponto</button>
+        <button onClick={abrirModalBatidaPonto}>Registrar Ponto</button>
         <a href=""></a>
       </ContentBatida>
 
