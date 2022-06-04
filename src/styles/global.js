@@ -9,7 +9,7 @@ const EstiloGlobal = createGlobalStyle`
     --fundo-header: #FFFFFF;
     --texto: #78788F;
     --texto-escuro: #58586B;
-
+    --check-verde: #67E474;
   }
 
   * {

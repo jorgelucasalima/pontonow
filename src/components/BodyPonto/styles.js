@@ -58,7 +58,6 @@ export const ContentRegistrosDia = styled.div`
     background: var(--fundo-header);
     padding: 1.5rem 1rem;
     border-radius: 0.25rem;
-    align-items: center;
     
     p{
       font-size: 1.25rem;
@@ -68,14 +67,12 @@ export const ContentRegistrosDia = styled.div`
     svg {
       font-size: 2rem;
       margin-right: 1rem;
+      color: var(--check-verde);
     }
 
     strong{
       font-size: 2rem;
     }
-
-
-
 
   }
 
