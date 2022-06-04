@@ -30,6 +30,7 @@ export const ContentBatida = styled.div`
   button {
     background: var(--laranga-button);
     font-size: 1rem;
+    font-weight: bold;
     color: #FFFFFF;
     border: 0;
     padding: 0 2rem;

@@ -1,7 +1,5 @@
 import {Container} from './styles'
 import Modal from 'react-modal'
-import { Link } from 'react-router-dom'
-
 
 
 export function ModalBatidaPonto(props) {
