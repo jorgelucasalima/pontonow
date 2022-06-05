@@ -4,8 +4,6 @@ import Modal from 'react-modal'
 
 export function ModalBatidaPonto(props) {
 
-  const horaAtual = new Date()
-
 
   return(
     <Modal
@@ -16,8 +14,8 @@ export function ModalBatidaPonto(props) {
     >
       <Container>
         <h2>Confirme seu registro!</h2>
-        <strong></strong>
-        <p>12 de agosto de 1994</p>
+        <strong>{ (new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(props.dataAtual)) }</strong>
+        <p>{new Intl.DateTimeFormat('pt-BR', { weekday:'long', month:'long', day:'numeric', year:'numeric' }).format(props.dataAtual)}</p>
         <button className='cancelar' onClick={props.onRequestClose}>Cancelar</button>
         <button>Registrar</button>
       </Container>

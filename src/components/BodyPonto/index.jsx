@@ -26,7 +26,7 @@ export function BodyPonto(props) {
 
   return(
     <Container>
-      <ModalBatidaPonto isOpen={isModalBatidaPontoOpen} onRequestClose={fecharModalBatidaPonto}/>
+      <ModalBatidaPonto isOpen={isModalBatidaPontoOpen} onRequestClose={fecharModalBatidaPonto} dataAtual={dataAtual}/>
       <ContentTexto>
         <h1>Bem vindo ao Ponto Now</h1>
         <p>Hoje é {new Intl.DateTimeFormat('pt-BR', { weekday:'long', month:'long', day:'numeric', year:'numeric' }).format(dataAtual)}</p>
