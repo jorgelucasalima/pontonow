@@ -16,6 +16,10 @@ export function BodyPonto(props) {
     setIsModalBatidaPontoOpen(false);
   }
 
+  //hora e dia atual
+  const dataAtual = new Date();
+
+ 
 
 
   return(
@@ -23,11 +27,11 @@ export function BodyPonto(props) {
       <ModalBatidaPonto isOpen={isModalBatidaPontoOpen} onRequestClose={fecharModalBatidaPonto}/>
       <ContentTexto>
         <h1>Bem vindo ao Ponto Now</h1>
-        <p>Registre seu ponto de acordo o horário do seu computador.</p>
+        <p>Hoje é {new Intl.DateTimeFormat('pt-BR', { weekday:'long', month:'long', day:'numeric', year:'numeric' }).format(dataAtual)}</p>
       </ContentTexto>
       
       <ContentBatida>
-        <h1>as</h1>
+        <h1>{ (new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(dataAtual)) }</h1>
         <button onClick={abrirModalBatidaPonto}>Registrar Ponto</button>
         <a href=""></a>
       </ContentBatida>
