@@ -6,8 +6,11 @@ import { useState } from 'react';
 
 export function BodyPonto(props) {
 
+  //estados
   const [isModalBatidaPontoOpen, setIsModalBatidaPontoOpen] = useState(false);
+  const [dataAtual, setDataAtual] = useState(new Date());
 
+  //funções
   function abrirModalBatidaPonto() {
     setIsModalBatidaPontoOpen(true);
   }
@@ -16,11 +19,10 @@ export function BodyPonto(props) {
     setIsModalBatidaPontoOpen(false);
   }
 
-  //hora e dia atual
-  const dataAtual = new Date();
-
- 
-
+  //ficar atualizando a dataAtual a cada 1 segundo
+  setTimeout(()=>{
+    setDataAtual(new Date());
+  }, 1000);
 
   return(
     <Container>
@@ -32,7 +34,7 @@ export function BodyPonto(props) {
       
       <ContentBatida>
         <h1>{ (new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(dataAtual)) }</h1>
-        <button onClick={abrirModalBatidaPonto}>Registrar Ponto</button>
+        <button onClick={abrirModalBatidaPonto}>REGISTRAR PONTO</button>
         <a href=""></a>
       </ContentBatida>
 
