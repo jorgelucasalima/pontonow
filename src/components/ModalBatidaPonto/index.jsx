@@ -7,6 +7,7 @@ export function ModalBatidaPonto(props) {
 
 
   //funções
+ 
   async function registrarPonto() {
     console.log(props.dataAtual)
     await firebase.firestore().collection('ponto').add({
@@ -22,6 +23,8 @@ export function ModalBatidaPonto(props) {
     })
   }
 
+
+
   return(
     <Modal
       isOpen={props.isOpen}
@@ -29,12 +32,12 @@ export function ModalBatidaPonto(props) {
       overlayClassName="react-modal-overlay"
       className="eact-modal-content"
     >
-      <Container onSubmit={registrarPonto}>
+      <Container>
         <h2>Confirme seu registro!</h2>
         <strong>{ (new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric' }).format(props.dataAtual)) }</strong>
         <p>{new Intl.DateTimeFormat('pt-BR', { weekday:'long', month:'long', day:'numeric', year:'numeric' }).format(props.dataAtual)}</p>
         <button className='cancelar' onClick={props.onRequestClose}>Cancelar</button>
-        <button type='submit'>Registrar</button>
+        <button onClick={registrarPonto}>Registrar</button>
       </Container>
     </Modal>
   )

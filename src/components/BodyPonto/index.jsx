@@ -24,6 +24,9 @@ export function BodyPonto(props) {
     setDataAtual(new Date());
   }, 1000);
 
+
+  
+
   return(
     <Container>
       <ModalBatidaPonto isOpen={isModalBatidaPontoOpen} onRequestClose={fecharModalBatidaPonto} dataAtual={dataAtual}/>
