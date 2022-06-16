@@ -2,13 +2,17 @@ import {Container, ContentTexto, ContentBatida, ContentRegistrosDia} from './sty
 import front from '../../assets/front.jpg'
 import { FiCheckCircle } from "react-icons/fi";
 import { ModalBatidaPonto } from '../ModalBatidaPonto';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import  firebase  from '../../services/apifirebase';
 
 export function BodyPonto(props) {
 
   //estados
   const [isModalBatidaPontoOpen, setIsModalBatidaPontoOpen] = useState(false);
   const [dataAtual, setDataAtual] = useState(new Date());
+
+  const [inicioExpediente, setInicioExpediente] = useState();
+  
 
   //funções
   function abrirModalBatidaPonto() {
@@ -19,13 +23,16 @@ export function BodyPonto(props) {
     setIsModalBatidaPontoOpen(false);
   }
 
+       
+
+
+
   //ficar atualizando a dataAtual a cada 1 segundo
   setTimeout(()=>{
     setDataAtual(new Date());
   }, 1000);
 
 
-  
 
   return(
     <Container>
@@ -46,7 +53,7 @@ export function BodyPonto(props) {
         <div>
           <p>Inicio Expediente</p>
           <FiCheckCircle/>
-          <strong>08:00:01</strong>
+          <strong>a</strong>
         </div>
         <div>
           <p>Inicio Intervalo</p>

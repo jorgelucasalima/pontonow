@@ -7,22 +7,50 @@ export function ModalBatidaPonto(props) {
 
 
   //funções
- 
-  async function registrarPonto() {
-    console.log(props.dataAtual)
-    await firebase.firestore().collection('ponto').add({
-      inicioExpediente: props.dataAtual,
-    })
-    .then(()=>{
-      alert('Ponto registrado com sucesso!')
-      props.onRequestClose()
 
-    })
-    .catch(()=>{
-      alert('Erro ao registrar ponto!')
-    })
-  }
+  async function registrar() {
+    const db = firebase.firestore();
+    const DocumentRef = db.collection('ponto').doc('8YYv4IyLXCNdAeFJ14vr')
+    
+    try {
+      const response = await db.runTransaction( async t => {
+        const doc = await t.get(DocumentRef);
+        console.log(doc.data())
 
+        if (doc.data().inicioExpediente === '') {
+          t.update(DocumentRef, {
+            inicioExpediente: props.dataAtual,
+          })
+          props.onRequestClose()
+        } 
+          //verificar se o inicio Expediente está preenchido e se o inicio do intervalo está vazio e depois adicina a hora atual no inicio intervalo
+          else if (doc.data().inicioExpediente !== '' && doc.data().inicioIntervalo === '') {
+            t.update(DocumentRef, {
+              inicioIntervalo: props.dataAtual,
+            })
+            props.onRequestClose()
+          }
+          //verificar se o inicio intervalo está preenchido e se o fim do intervalo está preenchido e depois adicina a hora atual no fim intervalo
+          else if (doc.data().inicioIntervalo !== '' && doc.data().fimIntervalo === '') {
+            t.update(DocumentRef, {
+              fimIntervalo: props.dataAtual,
+            })
+            props.onRequestClose()
+          }
+          //verificar se o fim do intervalo está preenchido e se o fim do expediente está vazio e depois adicina a hora atual no fim expediente
+          else if (doc.data().fimIntervalo !== '' && doc.data().fimExpediente === '') {
+            t.update(DocumentRef, {
+              fimExpediente: props.dataAtual,
+            })
+            props.onRequestClose()
+          }
+      })
+      
+    }  
+    catch (error) {
+      console.log(error)
+    }
+  }  
 
 
   return(
@@ -37,8 +65,9 @@ export function ModalBatidaPonto(props) {
         <strong>{ (new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric' }).format(props.dataAtual)) }</strong>
         <p>{new Intl.DateTimeFormat('pt-BR', { weekday:'long', month:'long', day:'numeric', year:'numeric' }).format(props.dataAtual)}</p>
         <button className='cancelar' onClick={props.onRequestClose}>Cancelar</button>
-        <button onClick={registrarPonto}>Registrar</button>
+        <button onClick={registrar}>Registrar</button>
       </Container>
     </Modal>
   )
+
 }
