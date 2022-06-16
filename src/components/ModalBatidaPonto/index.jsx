@@ -1,6 +1,7 @@
 import {Container} from './styles'
 import Modal from 'react-modal'
 import firebase from '../../services/apifirebase'
+import { toast } from 'react-toastify';
 
 
 export function ModalBatidaPonto(props) {
@@ -11,7 +12,7 @@ export function ModalBatidaPonto(props) {
   async function registrar() {
     const db = firebase.firestore();
     const DocumentRef = db.collection('ponto').doc('8YYv4IyLXCNdAeFJ14vr')
-    
+
     try {
       const response = await db.runTransaction( async t => {
         const doc = await t.get(DocumentRef);
@@ -22,6 +23,7 @@ export function ModalBatidaPonto(props) {
             inicioExpediente: props.dataAtual,
           })
           props.onRequestClose()
+          toast.success('Ponto registrado com sucesso!')
         } 
           //verificar se o inicio Expediente está preenchido e se o inicio do intervalo está vazio e depois adicina a hora atual no inicio intervalo
           else if (doc.data().inicioExpediente !== '' && doc.data().inicioIntervalo === '') {
@@ -29,6 +31,7 @@ export function ModalBatidaPonto(props) {
               inicioIntervalo: props.dataAtual,
             })
             props.onRequestClose()
+            toast.success('Ponto registrado com sucesso!')
           }
           //verificar se o inicio intervalo está preenchido e se o fim do intervalo está preenchido e depois adicina a hora atual no fim intervalo
           else if (doc.data().inicioIntervalo !== '' && doc.data().fimIntervalo === '') {
@@ -36,6 +39,7 @@ export function ModalBatidaPonto(props) {
               fimIntervalo: props.dataAtual,
             })
             props.onRequestClose()
+            toast.success('Ponto registrado com sucesso!')
           }
           //verificar se o fim do intervalo está preenchido e se o fim do expediente está vazio e depois adicina a hora atual no fim expediente
           else if (doc.data().fimIntervalo !== '' && doc.data().fimExpediente === '') {
@@ -43,11 +47,13 @@ export function ModalBatidaPonto(props) {
               fimExpediente: props.dataAtual,
             })
             props.onRequestClose()
+            toast.success('Ponto registrado com sucesso!')
           }
       })
       
     }  
     catch (error) {
+      toast.error('Ocorreu algum problema ao registrar o ponto!')
       console.log(error)
     }
   }  
