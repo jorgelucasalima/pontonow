@@ -11,6 +11,7 @@ const EstiloGlobal = createGlobalStyle`
     --texto-escuro: #58586B;
     --check-verde: #67E474;
     --cordefundo: #F0F2F5;
+    --azul-link: #7F70E5;
   }
 
   * {
