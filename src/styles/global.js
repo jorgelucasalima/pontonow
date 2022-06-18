@@ -5,6 +5,7 @@ const EstiloGlobal = createGlobalStyle`
 
   :root {
     --laranga-button: #FA9746;
+    --fundo-input: #FCAE49;
     --fundo: #EAF3FA;
     --fundo-header: #FFFFFF;
     --texto: #78788F;
