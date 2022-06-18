@@ -1,5 +1,6 @@
 import { Container, Content, ContentImg } from "./styles";
 import login from "../../assets/login.jpg";
+import { Link } from "react-router-dom";
  
 export function Login() {
   return( 
@@ -14,7 +15,7 @@ export function Login() {
           <input type="email" id="email" placeholder="E-mail" />
           <input type="password" id="password" placeholder="Senha"/>
           <button type="submit">Login</button>
-          <p>Entrar como administrador: <a href="">Clique Aqui</a> </p>
+          <p>Entrar como administrador: <Link to="/loginadmin">Clique Aqui</Link> </p>
         </form>
       </Content>
     </Container> 
