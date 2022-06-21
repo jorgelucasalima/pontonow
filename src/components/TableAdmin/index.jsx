@@ -1,8 +1,12 @@
-import { Container } from "./styles"
+import { Container, Content } from "./styles"
+import { FiEdit, FiEye, FiTrash } from "react-icons/fi";
 
 export function TableAdmin() {
   return (
     <Container>
+      <Content>
+        <button>Cadastrar</button>
+      </Content>
       <table>
         <thead>
           <tr>
@@ -18,9 +22,9 @@ export function TableAdmin() {
             <td>joao@qualinfo.com</td>
             <td>Desenvolvedor</td>
             <td>
-              <a href="">Ver</a>
-              <a href="">Editar</a>
-              <a href="">Excluir</a>
+              <a href=""> <FiEye/> </a>
+              <a href=""> <FiEdit/> </a>
+              <a href=""> <FiTrash/> </a>
             </td>
           </tr>
         </tbody>
