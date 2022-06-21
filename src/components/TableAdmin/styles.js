@@ -12,7 +12,7 @@ export const Container = styled.div`
     
     th {
       color: var(--texto);
-      font-weight: 400;
+      font-weight: bold;
       padding: 1rem 2rem;
       text-align: center;
       line-height: 1.5rem;
@@ -37,5 +37,29 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+
+  h2 {
+    color: var(--texto);
+  }
+
+  button {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: var(--laranga-button);
+    border: 0;
+    padding: 0 2rem;
+    height: 3rem;
+    border-radius: 0.25rem;
+   
+    transition: filter 0.2s;
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
 
 `

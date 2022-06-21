@@ -5,6 +5,7 @@ export function TableAdmin() {
   return (
     <Container>
       <Content>
+        <h2>Funcionários</h2>
         <button>Cadastrar</button>
       </Content>
       <table>
