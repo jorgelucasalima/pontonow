@@ -1,12 +1,29 @@
 import { Container, Content } from "./styles"
 import { FiEdit, FiEye, FiTrash } from "react-icons/fi";
+import { useState } from "react";
+import {ModalAdmin} from "../ModalAdmin"
+ 
+export function TableAdmin(props) {
 
-export function TableAdmin() {
+
+  const [isModalTableAdminOpen, setIsModalTableAdminOpen] = useState(false);
+
+  function abrirModalTableAdmin() {
+    setIsModalTableAdminOpen(true)
+  }
+
+  function fecharModalTableAdmin() {
+    setIsModalTableAdminOpen(false)
+  }
+
+
+
   return (
     <Container>
+      <ModalAdmin isOpen={isModalTableAdminOpen} onRequestClose={fecharModalTableAdmin}/>
       <Content>
         <h2>Funcionários</h2>
-        <button>Cadastrar</button>
+        <button onClick={abrirModalTableAdmin}>Cadastrar</button>
       </Content>
       <table>
         <thead>

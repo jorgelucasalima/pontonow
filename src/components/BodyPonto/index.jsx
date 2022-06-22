@@ -2,8 +2,7 @@ import {Container, ContentTexto, ContentBatida, ContentRegistrosDia} from './sty
 import front from '../../assets/front.jpg'
 import { FiCheckCircle } from "react-icons/fi";
 import { ModalBatidaPonto } from '../ModalBatidaPonto';
-import { useEffect, useState } from 'react';
-import  firebase  from '../../services/apifirebase';
+import { useState } from 'react';
 
 export function BodyPonto(props) {
 
