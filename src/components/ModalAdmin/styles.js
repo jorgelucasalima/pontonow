@@ -23,7 +23,6 @@ export const Container = styled.form`
   button {
     width: 100%;
     font-size: 1.5rem;
-    //font-weight: bold;
     color: #FFFFFF;
     background: var(--laranga-button);
     border: 0;

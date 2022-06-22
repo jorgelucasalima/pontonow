@@ -2,9 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  margin-top: 8rem;
-  margin-left: 30rem;
-  padding: 0 auto;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 8rem 20rem;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const Content = styled.div`

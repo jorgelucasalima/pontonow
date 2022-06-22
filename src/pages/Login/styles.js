@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  display: flex;
   max-width: 1120px;
   margin: 0 auto;
-  margin-top: 2rem;
-  padding: 0.25rem 1rem;
+  padding: 6rem 2rem;
   color: var(--texto);
-  display: flex;
 `;
 
 export const ContentImg = styled.div`
