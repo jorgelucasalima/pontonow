@@ -16,8 +16,26 @@ export const Container = styled.form`
     color: var(--texto-escuro);
     //  font-weight: bold;
     font-size: 1.25rem;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
     margin-bottom: 0.5rem;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1.5rem;
+    //font-weight: bold;
+    color: #FFFFFF;
+    background: var(--laranga-button);
+    border: 0;
+    padding: 0 2rem;
+    height: 4rem;
+    border-radius: 0.25rem;
+    margin-top: 1rem;
+   
+    transition: filter 0.2s;
+    &:hover {
+      filter: brightness(0.9);
+    }
   }
   
 `;

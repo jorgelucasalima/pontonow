@@ -17,7 +17,7 @@ export function ModalAdmin(props) {
           <input type="email" placeholder="E-mail"/>
           <input type="password" placeholder="Senha"/>
           <select name="" id="">
-            <option value="" selected>- Cargo -</option>
+            <option value="" selected>- Selecione o cargo -</option>
             <option value="Desenvolvedor">Desenvolvedor</option>
             <option value="Secretária">Secretária</option>
             <option value="Administrativo">Administrativo</option>
