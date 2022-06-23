@@ -10,7 +10,9 @@ function App() {
   Modal.setAppElement('#root');
   return (
     <Router>
-      <ToastContainer autoClose={3000}/>
+      <ToastContainer 
+        autoClose={5000}
+      />
       <Rotas/>
       <EstiloGlobal/>
     </Router>
