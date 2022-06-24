@@ -31,6 +31,7 @@ export function TableAdmin(props) {
             <th>Nome</th>
             <th>E-mail</th>
             <th>Cargo</th>
+            <th>Status</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -39,6 +40,7 @@ export function TableAdmin(props) {
             <td>João</td>
             <td>joao@qualinfo.com</td>
             <td>Desenvolvedor</td>
+            <td>Ativo</td>
             <td>
               <a href=""> <FiEye/> </a>
               <a href=""> <FiEdit/> </a>
