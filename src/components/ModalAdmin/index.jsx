@@ -2,29 +2,60 @@ import { Container } from "./styles"
 import Modal from 'react-modal'
 import { useState } from "react"
 import firebase from '../../services/apifirebase'
+import { toast } from "react-toastify"
 
 export function ModalAdmin(props) {
 
-  //const [nomeFuncionario, setNomeFuncionario] = useState('')
-  const [emailFuncionario, setEmailFuncionario] = useState('')
-  const [senhaFuncionario, setSenhaFuncionario] = useState('')
-  //const [cargoFuncionario, setCargoFuncionario] = useState('')
+  const [nome, setNome] = useState('')
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
+  const [cargo, setCargo] = useState('')
+  const [status, setStatus] = useState('')
 
 
   async function cadastrarFuncionario() {
-    await firebase.auth().createUserWithEmailAndPassword(emailFuncionario, senhaFuncionario)
+    await firebase.auth().createUserWithEmailAndPassword(email, senha)
     .then(() => {
       console.log('Usuário cadastrado com sucesso!')
     }).catch(error => {
       console.log(error)
     }
     )
+  }
+
+  async function cadastrarFuncionarioFirebase() {
+    await firebase.auth().createUserWithEmailAndPassword(email, senha)
+    .then( async (value) => {
+      await firebase.firestore().collection('usuarios').doc(value.user.uid)
+      .set({
+        nome: nome,
+        email: email,
+        cargo: cargo,
+        status: status
+      })
+      .then(() => {
+        toast.success('Usuário cadastrado com sucesso!')
+        props.setModalIsOpen(false)
+        setNome('')
+        setEmail('')
+        setSenha('')
+        setCargo('')
+        setStatus('')
+      })
+    })
+    .catch((error) => {  
+      if (error.code === 'auth/email-already-in-use') {
+        toast.error('E-mail já cadastrado!')
+      } else if (error.code === 'auth/weak-password') {
+        toast.error('Senha muito fraca!')
+      } else {
+        toast.error('Erro ao cadastrar usuário!')
+      }
+    })
 
   }
 
-// removido o form para inclusão do usuário
-// o ideal é deixar o form para cadastro das outras informações do usuário
-// e botar um onSubmit no container do form para chamar a função cadastrarFuncionario()
+
   return(
     <Modal
       isOpen={props.isOpen}
@@ -38,32 +69,44 @@ export function ModalAdmin(props) {
           <input 
             type="text" 
             placeholder="Nome"
-            
           />
           <input 
             type="email" 
             placeholder="E-mail"
-            value={emailFuncionario}
-            onChange={e => setEmailFuncionario(e.target.value)}
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
           <input 
             type="password" 
             placeholder="Senha"
-            value={senhaFuncionario}
-            onChange={e => setSenhaFuncionario(e.target.value)}   
+            value={senha}
+            onChange={e => setSenha(e.target.value)}   
           />
           <select 
-            name="cargoFuncionario" 
-            id="cargoFuncionario"
-           
+            name="cargo" 
+            id="cargo"
+            value={cargo}
+            onChange={e => setCargo(e.target.value)}
           >
-            <option value='DEFAULT' selected="selected" hidden>- Selecione o cargo -</option>
+            <option selected="selected" hidden>- Selecione o cargo -</option>
             <option value="Desenvolvedor">Desenvolvedor</option>
             <option value="Secretária">Secretária</option>
             <option value="Administrativo">Administrativo</option>
             <option value="Estágiario">Estágiario</option>
           </select>
-          <button onClick={cadastrarFuncionario}>Cadastrar</button>
+
+          <select 
+            name="status" 
+            id="status"
+            value={status}
+            onChange={e => setStatus(e.target.value)}  
+          >
+            <option selected="selected" hidden>- Selecione o status -</option>
+            <option value="Ativo">Ativo</option>
+            <option value="Inativo">Inativo</option>
+          </select>
+
+          <button onClick={cadastrarFuncionarioFirebase}>Cadastrar</button>
          
       </Container>
     </Modal>
