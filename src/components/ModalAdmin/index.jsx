@@ -35,7 +35,7 @@ export function ModalAdmin(props) {
       })
       .then(() => {
         toast.success('Usuário cadastrado com sucesso!')
-        props.setModalIsOpen(false)
+        props.onRequestClose()
         setNome('')
         setEmail('')
         setSenha('')
@@ -48,9 +48,7 @@ export function ModalAdmin(props) {
         toast.error('E-mail já cadastrado!')
       } else if (error.code === 'auth/weak-password') {
         toast.error('Senha muito fraca!')
-      } else {
-        toast.error('Erro ao cadastrar usuário!')
-      }
+      } 
     })
 
   }
@@ -69,6 +67,8 @@ export function ModalAdmin(props) {
           <input 
             type="text" 
             placeholder="Nome"
+            value={nome}
+            onChange={e => setNome(e.target.value)}
           />
           <input 
             type="email" 
