@@ -1,13 +1,18 @@
 import { Container, Content } from "./styles"
 import { FiEdit, FiEye, FiTrash } from "react-icons/fi";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {ModalAdmin} from "../ModalAdmin"
+import { UsuariosContext } from "../../contexts/usuarios";
  
 export function TableAdmin(props) {
 
+  const {usuarios} = useContext(UsuariosContext)
+  console.log(usuarios)
 
+  //estados
   const [isModalTableAdminOpen, setIsModalTableAdminOpen] = useState(false);
 
+  //funções
   function abrirModalTableAdmin() {
     setIsModalTableAdminOpen(true)
   }
@@ -36,17 +41,19 @@ export function TableAdmin(props) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>João</td>
-            <td>joao@qualinfo.com</td>
-            <td>Desenvolvedor</td>
-            <td>Ativo</td>
-            <td>
-              <a href=""> <FiEye/> </a>
-              <a href=""> <FiEdit/> </a>
-              <a href=""> <FiTrash/> </a>
-            </td>
-          </tr>
+        {usuarios.map( usuario => (
+            <tr key={usuario.uid}>
+              <td>{usuario.nome}</td>
+              <td>{usuario.email}</td>
+              <td>{usuario.cargo}</td>
+              <td>{usuario.status}</td>
+              <td>
+                <a href=""><FiEye/></a>
+                <a href=""><FiEdit/></a>
+                <a href=""><FiTrash/></a>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Container>

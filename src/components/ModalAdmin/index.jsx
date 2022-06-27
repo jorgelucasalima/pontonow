@@ -4,8 +4,10 @@ import { useState } from "react"
 import firebase from '../../services/apifirebase'
 import { toast } from "react-toastify"
 
+
 export function ModalAdmin(props) {
 
+  //estados
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
@@ -13,16 +15,7 @@ export function ModalAdmin(props) {
   const [status, setStatus] = useState('')
 
 
-  async function cadastrarFuncionario() {
-    await firebase.auth().createUserWithEmailAndPassword(email, senha)
-    .then(() => {
-      console.log('Usuário cadastrado com sucesso!')
-    }).catch(error => {
-      console.log(error)
-    }
-    )
-  }
-
+  //funções
   async function cadastrarFuncionarioFirebase() {
     await firebase.auth().createUserWithEmailAndPassword(email, senha)
     .then( async (value) => {
