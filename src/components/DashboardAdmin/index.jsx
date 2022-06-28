@@ -6,12 +6,12 @@ export function DashboardAdmin() {
     <Container>
       <Content>
         <div>
-          <p>Qtd. Funcionários</p>
+          <p>Funcionários Ativos</p>
           <FiUsers/>
           <strong>23</strong>
         </div>
         <div>
-          <p>Funcionários Férias</p>
+          <p>Funcionários Inativos</p>
           <FiUserMinus/>
           <strong>3</strong>
         </div>

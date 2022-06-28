@@ -11,8 +11,8 @@ export const Container = styled.div`
 export const Content = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
-  margin-top: 3rem;
+  gap: 1rem;
+  margin-top: 2rem;
 
   div {
     background: var(--fundo-header);
