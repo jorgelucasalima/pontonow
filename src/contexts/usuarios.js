@@ -16,7 +16,7 @@ function UsuarioProvider({ children }) {
 
         doc.forEach((item) => {
           arrayUsuarios.push({
-            uid: item.uid,
+            uid: item.data().uid,
             nome: item.data().nome,
             email: item.data().email,
             cargo: item.data().cargo,

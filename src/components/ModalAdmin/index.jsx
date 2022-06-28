@@ -21,6 +21,7 @@ export function ModalAdmin(props) {
     .then( async (value) => {
       await firebase.firestore().collection('usuarios').doc(value.user.uid)
       .set({
+        uid: value.user.uid,
         nome: nome,
         email: email,
         cargo: cargo,
