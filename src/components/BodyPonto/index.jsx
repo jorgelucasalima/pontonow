@@ -7,12 +7,10 @@ import firebase from '../../services/apifirebase'
 
 export function BodyPonto(props) {
 
+
   //estados
   const [isModalBatidaPontoOpen, setIsModalBatidaPontoOpen] = useState(false);
   const [dataAtual, setDataAtual] = useState(new Date());
-
-  const [user, setUser] = useState(false);
-  const [userLogado, setUserLogado] = useState({});
 
   const [inicioExpediente, setInicioExpediente] = useState();
   
@@ -27,33 +25,6 @@ export function BodyPonto(props) {
   }
 
        
-  //UseEffect 
-  useEffect(() => {
-    async function checkLogin() {
-      await firebase.auth().onAuthStateChanged((user)=>{
-        if(user){
-          //se o usuário tiver logado passa true no setUser
-          setUser(true);
-          setUserLogado(
-            {
-              uid: user.uid,
-              email: user.email,
-            }
-          );
-        }else{
-          // senão passa false no setUser
-          setUser(false);
-          setUserLogado({});
-        }
-      })
-    }
-    checkLogin();
-
-  }, [])
-
-
-
-
   //ficar atualizando a dataAtual a cada 1 segundo
   setTimeout(()=>{
     setDataAtual(new Date());
@@ -63,7 +34,12 @@ export function BodyPonto(props) {
 
   return(
     <Container>
-      <ModalBatidaPonto isOpen={isModalBatidaPontoOpen} onRequestClose={fecharModalBatidaPonto} dataAtual={dataAtual}/>
+      <ModalBatidaPonto 
+        isOpen={isModalBatidaPontoOpen} 
+        onRequestClose={fecharModalBatidaPonto} 
+        dataAtual={dataAtual}
+        uid={props.uid}
+      />
       <ContentTexto>
         <h1>Bem vindo ao Ponto Now</h1>
         <p>Hoje é {new Intl.DateTimeFormat('pt-BR', { weekday:'long', month:'long', day:'numeric', year:'numeric' }).format(dataAtual)}</p>

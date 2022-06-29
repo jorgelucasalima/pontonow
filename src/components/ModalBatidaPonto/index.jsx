@@ -58,6 +58,12 @@ export function ModalBatidaPonto(props) {
     }
   }  
 
+  async function registrarPonto() {
+    const db = firebase.firestore();
+    const DocumentRef = db.collection('ponto').doc()
+    console.log(DocumentRef)
+  }
+
 
   return(
     <Modal
@@ -71,7 +77,7 @@ export function ModalBatidaPonto(props) {
         <strong>{ (new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric' }).format(props.dataAtual)) }</strong>
         <p>{new Intl.DateTimeFormat('pt-BR', { weekday:'long', month:'long', day:'numeric', year:'numeric' }).format(props.dataAtual)}</p>
         <button className='cancelar' onClick={props.onRequestClose}>Cancelar</button>
-        <button onClick={registrar}>Registrar</button>
+        <button onClick={registrarPonto}>Registrar</button>
       </Container>
     </Modal>
   )

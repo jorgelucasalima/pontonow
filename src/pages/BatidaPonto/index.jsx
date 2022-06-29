@@ -35,8 +35,8 @@ export function BatidaPonto() {
 
   return(
     <Container>
-      <Header email={usuarioLogado.email} uid={usuarioLogado.uid}/>
-      <BodyPonto/>
+      <Header email={usuarioLogado.email}/>
+      <BodyPonto uid={usuarioLogado.uid}/>
     </Container>
   )
 }
