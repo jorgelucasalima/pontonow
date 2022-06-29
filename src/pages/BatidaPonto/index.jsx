@@ -3,18 +3,15 @@ import { BodyPonto } from "../../components/BodyPonto";
 import { Header } from "../../components/Header";
 import { Container } from "./styles";
 import firebase from '../../services/apifirebase'
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 
 export function BatidaPonto() {
 
-  const rota = useNavigate();
-
+  //estados
   const [usuario, setUsuario] = useState(false)
   const [usuarioLogado, setUsuarioLogado] = useState({})
-  console.log(usuarioLogado)
   
+  //useEffect
   useEffect(() => {
 
     async function getUsuario() {
@@ -33,7 +30,6 @@ export function BatidaPonto() {
     }
 
     getUsuario()
-
 
   }, [])
 
