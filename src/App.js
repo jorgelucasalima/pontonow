@@ -9,13 +9,11 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   Modal.setAppElement('#root');
   return (
-    <Router>
-      <ToastContainer 
-        autoClose={5000}
-      />
-      <Rotas/>
-      <EstiloGlobal/>
-    </Router>
+      <Router>
+        <ToastContainer autoClose={5000}/>
+        <Rotas/>
+        <EstiloGlobal/>
+      </Router>
   );
 }
 

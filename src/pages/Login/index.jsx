@@ -11,15 +11,16 @@ export function Login() {
   const rota = useNavigate();
 
   //estados
-  const [emailFuncionario, setEmailFuncionario] = useState('')
-  const [senhaFuncionario, setSenhaFuncionario] = useState('')
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
 
 
-  async function loginFuncionario() {
-    await firebase.auth().signInWithEmailAndPassword(emailFuncionario, senhaFuncionario)
-    .then(() => { 
+  async function loginUsuario() {
+    await firebase.auth().signInWithEmailAndPassword(email, senha)
+    .then((value) => { 
+      console.log(value.user)
       toast.success('Usuário logado com sucesso!')
-      rota('/batidaponto')
+      rota('/batidaponto' )
     })
     .catch((error) => {
       toast.error('email ou senha invalida!')
@@ -38,16 +39,16 @@ export function Login() {
           <input 
             type="email" 
             placeholder="E-mail" 
-            value={emailFuncionario}
-            onChange={e => setEmailFuncionario(e.target.value)}
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
           <input 
             type="password"
             placeholder="Senha"
-            value={senhaFuncionario}
-            onChange={e => setSenhaFuncionario(e.target.value)}
+            value={senha}
+            onChange={e => setSenha(e.target.value)}
           />
-          <button onClick={loginFuncionario}>Login</button>
+          <button onClick={loginUsuario}>Login</button>
           <p>Entrar como administrador: <Link to="/loginadmin">Clique Aqui</Link> </p>
       </Content>
     </Container> 
