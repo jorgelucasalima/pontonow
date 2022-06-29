@@ -16,7 +16,7 @@ export function DashboardAdmin() {
           <strong>3</strong>
         </div>
         <div>
-          <p>Total Funcioários</p>
+          <p>Funcioários Total</p>
           <FiUsers/>
           <strong>2</strong>
         </div>
