@@ -69,6 +69,11 @@ export function ModalBatidaPonto(props) {
               props.onRequestClose()
               toast.success('Ponto registrado com sucesso!')
             }
+
+            else {
+              props.onRequestClose()
+              toast.info('Todos os pontos foram registrados!')
+            }
         }
         catch (error) {
           props.onRequestClose()
