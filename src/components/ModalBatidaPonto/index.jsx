@@ -22,11 +22,11 @@ export function ModalBatidaPonto(props) {
     const DocumentRef = db.collection('ponto').doc(idDataString.toString());
     
     const doc = await DocumentRef.get()
-    
+    console.log(doc.data())
 
     //verificar se existe algum documento direfente da data de hoje 
     // se meu documento.id for diferente da data de hoje ele adiciona 
-    if (DocumentRef.id !== idDataString ) {
+    if (DocumentRef.id === idDataString && doc.data() === undefined ) {
       try {
         await DocumentRef.set({
           uid_documento: DocumentRef.id,
@@ -76,6 +76,7 @@ export function ModalBatidaPonto(props) {
             }
         }
         catch (error) {
+          console.log(error)
           props.onRequestClose()
           toast.error('Ocorreu um problema ao registrar o ponto!')
         }
