@@ -11,7 +11,11 @@ export function BodyPonto(props) {
   //estados
   const [isModalBatidaPontoOpen, setIsModalBatidaPontoOpen] = useState(false);
   const [dataAtual, setDataAtual] = useState(new Date());
-  const [registrosDia, setRegistrosDia] = useState([]);
+
+  const [inicioExpediente, setInicioExpediente] = useState('');
+  const [inicioIntervalo, setInicioIntervalo] = useState('');
+  const [fimIntervalo, setFimIntervalo] = useState('');
+  const [fimExpediente, setFimExpediente] = useState('');
 
   
   useEffect(() => {
@@ -27,15 +31,12 @@ export function BodyPonto(props) {
       
       const doc = await DocumentRef.get()
    
-      const dados = {
-        inicio_expediente: doc.data().inicio_expediente.toDate(),
-        inicio_intervalo: doc.data().inicio_intervalo.toDate(),
-        fim_intervalo: doc.data().fim_intervalo.toDate(),
-        fim_expediente: doc.data().fim_expediente.toDate(),
-      }
-
-      //setando objeto com os dados da hora do dia para o estado
-      setRegistrosDia(dados)
+      //setando os valores dos estados com os dados do banco
+      setInicioExpediente(doc.data().inicio_expediente.toDate())
+      setInicioIntervalo(doc.data().inicio_intervalo.toDate())
+      setFimIntervalo(doc.data().fim_intervalo.toDate())
+      setFimExpediente(doc.data().fim_expediente.toDate())
+      
     }
 
     getDatas()
@@ -83,22 +84,22 @@ export function BodyPonto(props) {
         <div>
           <p>Inicio Expediente</p>
           <FiCheckCircle/>
-          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(registrosDia.inicio_expediente) }</strong>
+          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(inicioExpediente) }</strong>
         </div>
         <div>
           <p>Inicio Intervalo</p>
           <FiCheckCircle/>
-          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(registrosDia.inicio_intervalo) }</strong>
+          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(inicioIntervalo) }</strong>
         </div>
         <div>
           <p>Fim Intervalo</p>
           <FiCheckCircle/>
-          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(registrosDia.fim_intervalo) }</strong>
+          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(fimIntervalo) }</strong>
         </div>
         <div>
           <p>Fim Expediente</p>
           <FiCheckCircle/>
-          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(registrosDia.fim_expediente) }</strong>
+          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(fimExpediente) }</strong>
         </div>
       </ContentRegistrosDia>
     </Container>
