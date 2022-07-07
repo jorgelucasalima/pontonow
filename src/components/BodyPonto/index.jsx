@@ -36,10 +36,6 @@ export function BodyPonto(props) {
 
       //setando objeto com os dados da hora do dia para o estado
       setRegistrosDia(dados)
-
-      console.log('teste '+ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(doc.data().inicio_expediente.toDate()))
-
-     
     }
 
     getDatas()
