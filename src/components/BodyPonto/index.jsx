@@ -1,9 +1,9 @@
 import {Container, ContentTexto, ContentBatida, ContentRegistrosDia} from './styles'
-import front from '../../assets/front.jpg'
 import { FiCheckCircle } from "react-icons/fi";
 import { ModalBatidaPonto } from '../ModalBatidaPonto';
 import { useState, useEffect } from 'react';
 import firebase from '../../services/apifirebase'
+
 
 export function BodyPonto(props) {
 
@@ -11,9 +11,40 @@ export function BodyPonto(props) {
   //estados
   const [isModalBatidaPontoOpen, setIsModalBatidaPontoOpen] = useState(false);
   const [dataAtual, setDataAtual] = useState(new Date());
+  const [registrosDia, setRegistrosDia] = useState([]);
 
-  const [inicioExpediente, setInicioExpediente] = useState();
   
+  useEffect(() => {
+    async function getDatas() {
+      const instaciaData = new Date()
+      const dia = instaciaData.getDate().toString()
+      const mes = instaciaData.getMonth() + 1
+      const ano = instaciaData.getFullYear()
+      const idDataString = (dia+'-'+mes+'-'+ano).toString()
+
+      const db = firebase.firestore();
+      const DocumentRef = db.collection('ponto').doc(idDataString.toString());
+      
+      const doc = await DocumentRef.get()
+   
+      const dados = {
+        inicio_expediente: doc.data().inicio_expediente.toDate(),
+        inicio_intervalo: doc.data().inicio_intervalo.toDate(),
+        fim_intervalo: doc.data().fim_intervalo.toDate(),
+        fim_expediente: doc.data().fim_expediente.toDate(),
+      }
+
+      //setando objeto com os dados da hora do dia para o estado
+      setRegistrosDia(dados)
+
+      console.log('teste '+ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(doc.data().inicio_expediente.toDate()))
+
+     
+    }
+
+    getDatas()
+  }, [])
+
 
   //funções
   function abrirModalBatidaPonto() {
@@ -56,22 +87,22 @@ export function BodyPonto(props) {
         <div>
           <p>Inicio Expediente</p>
           <FiCheckCircle/>
-          <strong>a</strong>
+          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(registrosDia.inicio_expediente) }</strong>
         </div>
         <div>
           <p>Inicio Intervalo</p>
           <FiCheckCircle/>
-          <strong>08:00:01</strong>
+          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(registrosDia.inicio_intervalo) }</strong>
         </div>
         <div>
           <p>Fim Intervalo</p>
           <FiCheckCircle/>
-          <strong>08:00:01</strong>
+          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(registrosDia.fim_intervalo) }</strong>
         </div>
         <div>
           <p>Fim Expediente</p>
           <FiCheckCircle/>
-          <strong>08:00:01</strong>
+          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(registrosDia.fim_expediente) }</strong>
         </div>
       </ContentRegistrosDia>
     </Container>
