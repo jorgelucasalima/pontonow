@@ -32,7 +32,6 @@ export function BodyPonto(props) {
       
       const doc = await DocumentRef.get()
    
-
       //setando os valores dos estados com os dados do banco
       setInicioExpediente(doc.data().inicio_expediente.toDate())
       setInicioIntervalo(doc.data().inicio_intervalo.toDate())
@@ -45,7 +44,6 @@ export function BodyPonto(props) {
   }, [])
 
   
-
 
   //funções
   function abrirModalBatidaPonto() {
