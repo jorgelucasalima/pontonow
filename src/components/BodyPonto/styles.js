@@ -60,10 +60,16 @@ export const ContentRegistrosDia = styled.div`
       margin-bottom: 1rem;
     }
 
-    svg {
-      font-size: 2rem;
-      margin-right: 1rem;
+    .check {
+      font-size: 1.9rem;
+      margin-right: 0.50rem;
       color: var(--check-verde);
+    }
+
+    .alerta {
+      font-size: 1.9rem;
+      margin-right: 0.50rem;
+      color: var(--fundo-input);
     }
 
     strong{

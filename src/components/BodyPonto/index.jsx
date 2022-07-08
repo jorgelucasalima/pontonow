@@ -1,8 +1,9 @@
 import {Container, ContentTexto, ContentBatida, ContentRegistrosDia} from './styles'
-import { FiCheckCircle } from "react-icons/fi";
+import { FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import { ModalBatidaPonto } from '../ModalBatidaPonto';
 import { useState, useEffect } from 'react';
 import firebase from '../../services/apifirebase'
+import { doc } from '@firebase/firestore';
 
 
 export function BodyPonto(props) {
@@ -31,6 +32,7 @@ export function BodyPonto(props) {
       
       const doc = await DocumentRef.get()
    
+
       //setando os valores dos estados com os dados do banco
       setInicioExpediente(doc.data().inicio_expediente.toDate())
       setInicioIntervalo(doc.data().inicio_intervalo.toDate())
@@ -41,6 +43,8 @@ export function BodyPonto(props) {
 
     getDatas()
   }, [])
+
+  
 
 
   //funções
@@ -80,26 +84,69 @@ export function BodyPonto(props) {
       </ContentBatida>
 
       <ContentRegistrosDia>
-        
-        <div>
+       <div>
           <p>Inicio Expediente</p>
-          <FiCheckCircle/>
-          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(inicioExpediente) }</strong>
+          {
+            inicioExpediente !== '' ? (
+              <>
+                <FiCheckCircle className='check'/>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(inicioExpediente) }</strong>
+              </>
+            ) : (
+              <>
+                <FiAlertCircle className='alerta'/>
+                <a href=""></a>
+              </>
+            )
+          }
         </div>
         <div>
           <p>Inicio Intervalo</p>
-          <FiCheckCircle/>
-          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(inicioIntervalo) }</strong>
+          {
+            inicioIntervalo !== '' ? (
+              <>
+                <FiCheckCircle className='check'/>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(inicioIntervalo) }</strong>
+              </>
+            ) : (
+              <>
+                <FiAlertCircle className='alerta'/>
+                <a href=""></a>
+              </>
+            )
+          }
         </div>
         <div>
           <p>Fim Intervalo</p>
-          <FiCheckCircle/>
-          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(fimIntervalo) }</strong>
+          {
+            fimIntervalo !== '' ? (
+              <>
+                <FiCheckCircle className='check'/>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(fimIntervalo) }</strong>
+              </>
+            ) : (
+              <>
+                <FiAlertCircle className='alerta'/>
+                <a href=""></a>
+              </>
+            )
+          }
         </div>
         <div>
           <p>Fim Expediente</p>
-          <FiCheckCircle/>
-          <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(fimExpediente) }</strong>
+          {
+            fimExpediente !== '' ? (
+              <>
+                <FiCheckCircle className='check'/>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(fimExpediente) }</strong>
+              </>
+            ) : (
+              <>
+                <FiAlertCircle className='alerta'/>
+                <a href=""></a>
+              </>
+            )
+          }
         </div>
       </ContentRegistrosDia>
     </Container>
