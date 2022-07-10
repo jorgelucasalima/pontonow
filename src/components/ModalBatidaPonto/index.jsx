@@ -18,13 +18,14 @@ export function ModalBatidaPonto(props) {
     const idDataString = (dia+'-'+mes+'-'+ano).toString()
    
     const db = firebase.firestore();
-    const DocumentRef = db.collection('ponto').doc(idDataString.toString());
+    const DocumentRef = db.collection('ponto').doc(idDataString+'-'+props.uid);
+    console.log('Documento.id: '+DocumentRef.id)
     
     const doc = await DocumentRef.get()
 
     //verificar se existe algum documento direfente da data de hoje 
     // se meu documento.id for diferente da data de hoje ele adiciona 
-    if (DocumentRef.id === idDataString && doc.data() === undefined ) {
+    if (DocumentRef.id === idDataString+'-'+props.uid && doc.data() === undefined ) {
       try {
         await DocumentRef.set({
           uid_documento: DocumentRef.id,
