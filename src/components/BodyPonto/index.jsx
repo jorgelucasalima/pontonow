@@ -3,7 +3,6 @@ import { FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import { ModalBatidaPonto } from '../ModalBatidaPonto';
 import { useState, useEffect } from 'react';
 import firebase from '../../services/apifirebase'
-import { doc } from '@firebase/firestore';
 
 
 export function BodyPonto(props) {
@@ -22,7 +21,7 @@ export function BodyPonto(props) {
   useEffect(() => {
     async function getDatas() {
       const instaciaData = new Date()
-      const dia = instaciaData.getDate().toString()
+      const dia = instaciaData.getDate()
       const mes = instaciaData.getMonth() + 1
       const ano = instaciaData.getFullYear()
       const idDataString = (dia+'-'+mes+'-'+ano).toString()
