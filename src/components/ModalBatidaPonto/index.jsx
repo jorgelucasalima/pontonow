@@ -25,7 +25,7 @@ export function ModalBatidaPonto(props) {
 
     //verificar se existe algum documento direfente da data de hoje 
     // se meu documento.id for diferente da data de hoje ele adiciona 
-    if (DocumentRef.id === uid_documento && doc.data() === undefined ) {
+    if (DocumentRef.id === idDataString+'-'+props.uid && doc.data() === undefined ) {
       try {
         await DocumentRef.set({
           uid_documento: DocumentRef.id,

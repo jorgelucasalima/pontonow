@@ -26,11 +26,10 @@ export function BodyPonto(props) {
       const ano = instaciaData.getFullYear()
       const idDataString = (dia+'-'+mes+'-'+ano).toString()
       
-
       const db = firebase.firestore();
       const DocumentRef = db.collection('ponto').doc(idDataString+'-'+props.uid);
       const doc = await DocumentRef.get()
-  
+      console.log(doc.data())
       //setando os valores dos estados com os dados do banco
       setInicioExpediente(doc.data().inicio_expediente.toDate())
       setInicioIntervalo(doc.data().inicio_intervalo.toDate())
