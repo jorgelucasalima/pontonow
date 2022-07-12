@@ -16,8 +16,8 @@ export function BodyPonto(props) {
   const [inicioIntervalo, setInicioIntervalo] = useState('');
   const [fimIntervalo, setFimIntervalo] = useState('');
   const [fimExpediente, setFimExpediente] = useState('');
+ 
 
-  
   useEffect(() => {
     async function getDatas() {
       const instaciaData = new Date()
@@ -25,12 +25,12 @@ export function BodyPonto(props) {
       const mes = instaciaData.getMonth() + 1
       const ano = instaciaData.getFullYear()
       const idDataString = (dia+'-'+mes+'-'+ano).toString()
+      
 
       const db = firebase.firestore();
-      const DocumentRef = db.collection('ponto').doc(idDataString.toString());
-      
+      const DocumentRef = db.collection('ponto').doc(idDataString+'-'+props.uid);
       const doc = await DocumentRef.get()
-   
+  
       //setando os valores dos estados com os dados do banco
       setInicioExpediente(doc.data().inicio_expediente.toDate())
       setInicioIntervalo(doc.data().inicio_intervalo.toDate())
@@ -38,7 +38,7 @@ export function BodyPonto(props) {
       setFimExpediente(doc.data().fim_expediente.toDate())
       
     }
-
+  
     getDatas()
   }, [])
 
@@ -58,7 +58,6 @@ export function BodyPonto(props) {
   setTimeout(()=>{
     setDataAtual(new Date());
   }, 1000);
-
 
 
   return(
