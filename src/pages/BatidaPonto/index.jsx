@@ -14,6 +14,7 @@ export function BatidaPonto() {
   //useEffect
   useEffect(() => {
 
+
     async function getUsuario() {
       await firebase.auth().onAuthStateChanged(user => {
         if (user) {

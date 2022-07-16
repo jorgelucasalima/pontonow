@@ -16,30 +16,41 @@ export function BodyPonto(props) {
   const [inicioIntervalo, setInicioIntervalo] = useState('');
   const [fimIntervalo, setFimIntervalo] = useState('');
   const [fimExpediente, setFimExpediente] = useState('');
- 
 
   useEffect(() => {
     async function getDatas() {
+      //instanciando o banco de dados firebase
+      const db = firebase.firestore();
+      
+      //colletion usuarios
+      const DocumentRefUsuario = db.collection('usuarios').doc(props.uid.toString());
+      const docUsuario = await DocumentRefUsuario.get();
+      const nomeUsuario = docUsuario.data().nome;
+
+      // instacia datas
       const instaciaData = new Date()
       const dia = instaciaData.getDate()
       const mes = instaciaData.getMonth() + 1
       const ano = instaciaData.getFullYear()
+      //data atual em string
       const idDataString = (dia+'-'+mes+'-'+ano).toString()
-      
-      const db = firebase.firestore();
-      const DocumentRef = db.collection('ponto').doc(idDataString+'-'+props.uid);
+
+      //id que vai ser repassado no doc
+      const uid_documento = idDataString;
+
+      //colletionc ponto
+      const DocumentRef = db.collection('ponto').doc(uid_documento);
       const doc = await DocumentRef.get()
-      console.log(doc.data())
-      //setando os valores dos estados com os dados do banco
-      setInicioExpediente(doc.data().inicio_expediente.toDate())
-      setInicioIntervalo(doc.data().inicio_intervalo.toDate())
-      setFimIntervalo(doc.data().fim_intervalo.toDate())
-      setFimExpediente(doc.data().fim_expediente.toDate())
-      
+        //setando os valores dos estados com os dados do banco
+
+        doc.data() !== undefined ? setInicioExpediente(doc.data().inicio_expediente.toDate()) : setInicioExpediente('')
+        doc.data() !== undefined ? setInicioIntervalo(doc.data().inicio_intervalo.toDate()) : setInicioIntervalo('')
+        doc.data() !== undefined ? setFimIntervalo(doc.data().fim_intervalo.toDate()) : setFimIntervalo('')
+        doc.data() !== undefined ? setFimExpediente(doc.data().fim_expediente.toDate()) : setFimExpediente('')
     }
   
     getDatas()
-  }, [])
+  }, [inicioExpediente, inicioIntervalo, fimIntervalo, fimExpediente])
 
   
 
@@ -143,6 +154,7 @@ export function BodyPonto(props) {
             )
           }
         </div>
+        
       </ContentRegistrosDia>
     </Container>
     

@@ -2,84 +2,106 @@ import {Container} from './styles'
 import Modal from 'react-modal'
 import firebase from '../../services/apifirebase'
 import { toast } from 'react-toastify';
+import { doc } from '@firebase/firestore';
+
 
 
 export function ModalBatidaPonto(props) {
 
   //funções
-
   async function registrarPonto() {
 
+    // instacia datas
     const instaciaData = new Date()
     const dia = instaciaData.getDate()
     const mes = instaciaData.getMonth() + 1
     const ano = instaciaData.getFullYear()
+    const dataString = (dia+'-'+mes+'-'+ano).toString()
 
-    const idDataString = (dia+'-'+mes+'-'+ano).toString()
+    //instanciando o banco de dados firebase
+    const db = firebase.firestore();
+
+    //colletion usuarios
+    const DocumentRefUsuario = db.collection('usuarios').doc(props.uid.toString());
+    const docUsuario = await DocumentRefUsuario.get();
+
+    //colletion ponto
+    const DocumentRefPontos = db.collection('pontos')
+    const docPonto = await DocumentRefPontos
+    .where('uid_usuario', '==', docUsuario.data().uid)
+    .where('data', '==', dataString)
+    .get()
 
    
-    const db = firebase.firestore();
-    const DocumentRef = db.collection('ponto').doc(idDataString+'-'+props.uid);
-    
-    const doc = await DocumentRef.get()
-
-    //verificar se existe algum documento direfente da data de hoje 
-    // se meu documento.id for diferente da data de hoje ele adiciona 
-    if (DocumentRef.id === idDataString+'-'+props.uid && doc.data() === undefined ) {
-      try {
-        await DocumentRef.set({
-          uid_documento: DocumentRef.id,
-          uid_usuario: props.uid,
-          inicio_expediente: props.dataAtual,
-          inicio_intervalo: '',
-          fim_intervalo: '',
-          fim_expediente: '',
+    // verificando se o usuario ja batiu o ponto no dia de acordo array de pontos do dia
+    if(docPonto.docs.length === 0) {
+      await db.collection('pontos')
+        .add({
+          uid_usuario: docUsuario.data().uid,
+          nome_usuario: docUsuario.data().nome,
+          email_usuario: docUsuario.data().email,
+          data: dataString,
+          inicioExpediente: props.dataAtual,
         })
-        props.onRequestClose()
-        toast.success('Ponto registrado com sucesso!')
-      } catch (error) {
+        .then(() => {
           props.onRequestClose()
-          toast.error('Ocorreu um problema ao registrar o ponto!')
-      }
-        
-      }  else  {
-        try {
-          //verificar se inicio expediente esta vazio e inicio intervalo ta nulo e adiciona
-          if (doc.data().inicio_expediente !== '' && doc.data().inicio_intervalo === '') {
-            await DocumentRef.update({
-              inicio_intervalo: props.dataAtual,
-            })
+          toast.success('Ponto registrado com sucesso!')
+        })
+        .catch(() => {
+          toast.error('Erro ao registrar ponto!')
+        })
+    } else if(docPonto.docs.length === 1) {
+        await db.collection('pontos')
+          .add({
+            uid_usuario: docUsuario.data().uid,
+            nome_usuario: docUsuario.data().nome,
+            email_usuario: docUsuario.data().email,
+            data: dataString,
+            inicioIntervalo: props.dataAtual,
+          })
+          .then(() => {
             props.onRequestClose()
             toast.success('Ponto registrado com sucesso!')
-          }
-          //verifica se o inicio intervalo esta vazio e fim intervalo ta nulo e adiciona
-            else if (doc.data().inicio_intervalo !== '' && doc.data().fim_intervalo === '') {
-              await DocumentRef.update({
-                fim_intervalo: props.dataAtual,
-              })
-              props.onRequestClose()
-              toast.success('Ponto registrado com sucesso!')
-            }
-            //verifica se o fim intervalo esta vazio e fim expediente ta nulo e adiciona
-            else if (doc.data().fim_intervalo !== '' && doc.data().fim_expediente === '') {
-              await DocumentRef.update({
-                fim_expediente: props.dataAtual,
-              })
-              props.onRequestClose()
-              toast.success('Ponto registrado com sucesso!')
-            }
-
-            else {
-              props.onRequestClose()
-              toast.info('Todos os pontos foram registrados!')
-            }
-        }
-        catch (error) {
-          console.log(error)
+          })
+          .catch(() => {
+            toast.error('Erro ao registrar ponto!')
+          })
+    } else if(docPonto.docs.length === 2) {
+        await db.collection('pontos')
+          .add({
+            uid_usuario: docUsuario.data().uid,
+            nome_usuario: docUsuario.data().nome,
+            email_usuario: docUsuario.data().email,
+            data: dataString,
+            fimIntervalo: props.dataAtual,
+          })
+          .then(() => {
+            props.onRequestClose()
+            toast.success('Ponto registrado com sucesso!')
+          })
+          .catch(() => {
+            toast.error('Erro ao registrar ponto!')
+          })
+    } else if(docPonto.docs.length === 3) {
+      await db.collection('pontos')
+        .add({
+          uid_usuario: docUsuario.data().uid,
+          nome_usuario: docUsuario.data().nome,
+          email_usuario: docUsuario.data().email,
+          data: dataString,
+          fimExpediente: props.dataAtual,
+        })
+        .then(() => {
           props.onRequestClose()
-          toast.error('Ocorreu um problema ao registrar o ponto!')
-        }
-    }
+          toast.success('Ponto registrado com sucesso!')
+        })
+        .catch(() => {
+          toast.error('Erro ao registrar ponto!')
+        })
+      } else {
+        props.onRequestClose()
+        toast.info('Você já registrou todos pontos de hoje!')
+      }
   }
  
 
