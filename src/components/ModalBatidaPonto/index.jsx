@@ -2,8 +2,6 @@ import {Container} from './styles'
 import Modal from 'react-modal'
 import firebase from '../../services/apifirebase'
 import { toast } from 'react-toastify';
-import { doc } from '@firebase/firestore';
-
 
 
 export function ModalBatidaPonto(props) {
@@ -42,6 +40,7 @@ export function ModalBatidaPonto(props) {
           email_usuario: docUsuario.data().email,
           data: dataString,
           inicioExpediente: props.dataAtual,
+          status: 'inicio_expediente'
         })
         .then(() => {
           props.onRequestClose()
@@ -58,6 +57,7 @@ export function ModalBatidaPonto(props) {
             email_usuario: docUsuario.data().email,
             data: dataString,
             inicioIntervalo: props.dataAtual,
+            status: 'inicio_intervalo'
           })
           .then(() => {
             props.onRequestClose()
@@ -74,6 +74,7 @@ export function ModalBatidaPonto(props) {
             email_usuario: docUsuario.data().email,
             data: dataString,
             fimIntervalo: props.dataAtual,
+            status: 'fim_intervalo'
           })
           .then(() => {
             props.onRequestClose()
@@ -90,6 +91,7 @@ export function ModalBatidaPonto(props) {
           email_usuario: docUsuario.data().email,
           data: dataString,
           fimExpediente: props.dataAtual,
+          status: 'fim_expediente'
         })
         .then(() => {
           props.onRequestClose()

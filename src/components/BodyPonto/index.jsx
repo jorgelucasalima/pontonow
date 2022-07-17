@@ -7,52 +7,58 @@ import firebase from '../../services/apifirebase'
 
 export function BodyPonto(props) {
 
-
   //estados
   const [isModalBatidaPontoOpen, setIsModalBatidaPontoOpen] = useState(false);
-  const [dataAtual, setDataAtual] = useState(new Date());
+  const [dataAtual, setDataAtual] = useState(new Date())
 
-  const [inicioExpediente, setInicioExpediente] = useState('');
-  const [inicioIntervalo, setInicioIntervalo] = useState('');
-  const [fimIntervalo, setFimIntervalo] = useState('');
-  const [fimExpediente, setFimExpediente] = useState('');
+  const [inicioExpediente, setInicioExpediente] = useState('')
+  const [inicioIntervalo, setInicioIntervalo] = useState('')
+  const [fimIntervalo, setFimIntervalo] = useState('')
+  const [fimExpediente, setFimExpediente] = useState('')
 
-  useEffect(() => {
-    async function getDatas() {
-      //instanciando o banco de dados firebase
-      const db = firebase.firestore();
-      
-      //colletion usuarios
-      const DocumentRefUsuario = db.collection('usuarios').doc(props.uid.toString());
-      const docUsuario = await DocumentRefUsuario.get();
-      const nomeUsuario = docUsuario.data().nome;
-
-      // instacia datas
+  useEffect( () => {
+    async function getPontos() {
+    // instacia datas
       const instaciaData = new Date()
       const dia = instaciaData.getDate()
       const mes = instaciaData.getMonth() + 1
       const ano = instaciaData.getFullYear()
-      //data atual em string
-      const idDataString = (dia+'-'+mes+'-'+ano).toString()
+      const dataString = (dia+'-'+mes+'-'+ano).toString()
 
-      //id que vai ser repassado no doc
-      const uid_documento = idDataString;
+      //instanciando o banco de dados firebase
+      const db = firebase.firestore();
 
-      //colletionc ponto
-      const DocumentRef = db.collection('ponto').doc(uid_documento);
-      const doc = await DocumentRef.get()
-        //setando os valores dos estados com os dados do banco
+      //colletion usuarios
+      const DocumentRefUsuario = db.collection('usuarios').doc(props.uid.toString());
+      const docUsuario = await DocumentRefUsuario.get();
 
-        doc.data() !== undefined ? setInicioExpediente(doc.data().inicio_expediente.toDate()) : setInicioExpediente('')
-        doc.data() !== undefined ? setInicioIntervalo(doc.data().inicio_intervalo.toDate()) : setInicioIntervalo('')
-        doc.data() !== undefined ? setFimIntervalo(doc.data().fim_intervalo.toDate()) : setFimIntervalo('')
-        doc.data() !== undefined ? setFimExpediente(doc.data().fim_expediente.toDate()) : setFimExpediente('')
+      //colletion ponto
+      const DocumentRefPontos = db.collection('pontos')
+      const docPonto = await DocumentRefPontos
+      .where('uid_usuario', '==', docUsuario.data().uid)
+      .where('data', '==', dataString)
+      .get()
+
+      docPonto.forEach(item => {
+        console.log(item.data())
+        if (item.data().status === 'inicio_expediente') {
+          setInicioExpediente(item.data().inicioExpediente.toDate())
+        }
+        if (item.data().status === 'inicio_intervalo') {
+          setInicioIntervalo(item.data().inicioIntervalo.toDate())
+        }
+        if (item.data().status === 'fim_intervalo') {
+          setFimIntervalo(item.data().fimIntervalo.toDate())
+        }
+        if (item.data().status === 'fim_expediente') {
+          setFimExpediente(item.data().fimExpediente.toDate())
+        }
+      })
     }
-  
-    getDatas()
+    getPontos()
+
   }, [inicioExpediente, inicioIntervalo, fimIntervalo, fimExpediente])
 
-  
 
   //funções
   function abrirModalBatidaPonto() {
@@ -90,7 +96,7 @@ export function BodyPonto(props) {
       </ContentBatida>
 
       <ContentRegistrosDia>
-       <div>
+      <div>
           <p>Inicio Expediente</p>
           {
             inicioExpediente !== '' ? (
