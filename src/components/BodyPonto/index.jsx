@@ -15,6 +15,7 @@ export function BodyPonto(props) {
   const [inicioIntervalo, setInicioIntervalo] = useState('')
   const [fimIntervalo, setFimIntervalo] = useState('')
   const [fimExpediente, setFimExpediente] = useState('')
+  //console.log(inicioExpediente, inicioIntervalo, fimIntervalo, fimExpediente)
 
   useEffect( () => {
     async function getPontos() {
@@ -40,7 +41,7 @@ export function BodyPonto(props) {
       .get()
 
       docPonto.forEach(item => {
-        console.log(item.data())
+        //console.log(item.data()) 
         if (item.data().status === 'inicio_expediente') {
           setInicioExpediente(item.data().inicioExpediente.toDate())
         }
@@ -53,6 +54,7 @@ export function BodyPonto(props) {
         if (item.data().status === 'fim_expediente') {
           setFimExpediente(item.data().fimExpediente.toDate())
         }
+        
       })
     }
     getPontos()
