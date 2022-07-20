@@ -39,7 +39,7 @@ export function ModalBatidaPonto(props) {
           nome_usuario: docUsuario.data().nome,
           email_usuario: docUsuario.data().email,
           data: dataString,
-          inicioExpediente: props.dataAtual,
+          ponto: props.dataAtual,
           status: 'inicio_expediente'
         })
         .then(() => {
@@ -56,7 +56,7 @@ export function ModalBatidaPonto(props) {
             nome_usuario: docUsuario.data().nome,
             email_usuario: docUsuario.data().email,
             data: dataString,
-            inicioIntervalo: props.dataAtual,
+            ponto: props.dataAtual,
             status: 'inicio_intervalo'
           })
           .then(() => {
@@ -73,7 +73,7 @@ export function ModalBatidaPonto(props) {
             nome_usuario: docUsuario.data().nome,
             email_usuario: docUsuario.data().email,
             data: dataString,
-            fimIntervalo: props.dataAtual,
+            ponto: props.dataAtual,
             status: 'fim_intervalo'
           })
           .then(() => {
@@ -90,7 +90,7 @@ export function ModalBatidaPonto(props) {
           nome_usuario: docUsuario.data().nome,
           email_usuario: docUsuario.data().email,
           data: dataString,
-          fimExpediente: props.dataAtual,
+          ponto: props.dataAtual,
           status: 'fim_expediente'
         })
         .then(() => {

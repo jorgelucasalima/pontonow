@@ -15,9 +15,16 @@ export function BodyPonto(props) {
   const [inicioIntervalo, setInicioIntervalo] = useState('')
   const [fimIntervalo, setFimIntervalo] = useState('')
   const [fimExpediente, setFimExpediente] = useState('')
-  //console.log(inicioExpediente, inicioIntervalo, fimIntervalo, fimExpediente)
+  const [registrosDia, setRegistrosDia] = useState({})
+  //console.log('registros: ',registrosDia)
 
   useEffect( () => {
+    
+    getPontos()
+
+  }, [registrosDia])
+
+
     async function getPontos() {
     // instacia datas
       const instaciaData = new Date()
@@ -41,26 +48,18 @@ export function BodyPonto(props) {
       .get()
 
       docPonto.forEach(item => {
-        //console.log(item.data()) 
-        if (item.data().status === 'inicio_expediente') {
-          setInicioExpediente(item.data().inicioExpediente.toDate())
+        //console.log('documento: ', item.data())
+        let dados = {
+          inicioExpediente: item.data().inicioExpediente.toDate(),
+          inicioIntervalo: item.data().inicioIntervalo.toDate(),
+          fimIntervalo: item.data().fimIntervalo.toDate(),
+          fimExpediente: item.data().fimExpediente.toDate(),
         }
-        if (item.data().status === 'inicio_intervalo') {
-          setInicioIntervalo(item.data().inicioIntervalo.toDate())
-        }
-        if (item.data().status === 'fim_intervalo') {
-          setFimIntervalo(item.data().fimIntervalo.toDate())
-        }
-        if (item.data().status === 'fim_expediente') {
-          setFimExpediente(item.data().fimExpediente.toDate())
-        }
-        
+        setRegistrosDia(dados)
+
       })
+
     }
-    getPontos()
-
-  }, [inicioExpediente, inicioIntervalo, fimIntervalo, fimExpediente])
-
 
   //funções
   function abrirModalBatidaPonto() {
