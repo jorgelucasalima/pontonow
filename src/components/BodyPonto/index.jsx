@@ -10,19 +10,15 @@ export function BodyPonto(props) {
   //estados
   const [isModalBatidaPontoOpen, setIsModalBatidaPontoOpen] = useState(false);
   const [dataAtual, setDataAtual] = useState(new Date())
+  const [pontoDia, setPontoDia] = useState({})
 
-  const [inicioExpediente, setInicioExpediente] = useState('')
-  const [inicioIntervalo, setInicioIntervalo] = useState('')
-  const [fimIntervalo, setFimIntervalo] = useState('')
-  const [fimExpediente, setFimExpediente] = useState('')
-  const [registrosDia, setRegistrosDia] = useState({})
-  //console.log('registros: ',registrosDia)
+  //console.log('Ponto: ',pontoDia)
 
   useEffect( () => {
     
     getPontos()
 
-  }, [registrosDia])
+  }, [pontoDia])
 
 
     async function getPontos() {
@@ -48,14 +44,12 @@ export function BodyPonto(props) {
       .get()
 
       docPonto.forEach(item => {
-        //console.log('documento: ', item.data())
-        let dados = {
-          inicioExpediente: item.data().inicioExpediente.toDate(),
-          inicioIntervalo: item.data().inicioIntervalo.toDate(),
-          fimIntervalo: item.data().fimIntervalo.toDate(),
-          fimExpediente: item.data().fimExpediente.toDate(),
+        //console.log('item: ',item.data())
+        if (item.data().status === 'inicio_expediente') {
+          setPontoDia('inicio_expediente', item.data().ponto.toDate())
+        } else if (item.data().status === 'inicio_intervalo') {
+          setPontoDia('inicio_intervalo', item.data().ponto.toDate())
         }
-        setRegistrosDia(dados)
 
       })
 
@@ -100,10 +94,10 @@ export function BodyPonto(props) {
       <div>
           <p>Inicio Expediente</p>
           {
-            inicioExpediente !== '' ? (
+            pontoDia.inicio_expediente !== '' ? (
               <>
                 <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(inicioExpediente) }</strong>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(pontoDia.inicio_expediente) }</strong>
               </>
             ) : (
               <>
@@ -116,10 +110,10 @@ export function BodyPonto(props) {
         <div>
           <p>Inicio Intervalo</p>
           {
-            inicioIntervalo !== '' ? (
+            pontoDia.inicio_intervalo !== '' ? (
               <>
                 <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(inicioIntervalo) }</strong>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(pontoDia.inicio_intervalo) }</strong>
               </>
             ) : (
               <>
@@ -132,10 +126,10 @@ export function BodyPonto(props) {
         <div>
           <p>Fim Intervalo</p>
           {
-            fimIntervalo !== '' ? (
+            pontoDia.fim_intervalo !== '' ? (
               <>
                 <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(fimIntervalo) }</strong>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(pontoDia.fim_intervalo) }</strong>
               </>
             ) : (
               <>
@@ -148,10 +142,10 @@ export function BodyPonto(props) {
         <div>
           <p>Fim Expediente</p>
           {
-            fimExpediente !== '' ? (
+            pontoDia.fim_expediente !== '' ? (
               <>
                 <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(fimExpediente) }</strong>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(pontoDia.fim_expediente) }</strong>
               </>
             ) : (
               <>
