@@ -10,50 +10,55 @@ export function BodyPonto(props) {
   //estados
   const [isModalBatidaPontoOpen, setIsModalBatidaPontoOpen] = useState(false);
   const [dataAtual, setDataAtual] = useState(new Date())
-  const [pontoDia, setPontoDia] = useState({})
+  const [registros, setRegistros] = useState([])
 
-  //console.log('Ponto: ',pontoDia)
+  //console.log('REGISTRO: ', registros)
+
+
+
+
+  //usando para não dá erro na renderização do html
+  const [a, setA] = useState('')
 
   useEffect( () => {
     
-    getPontos()
-
-  }, [pontoDia])
-
-
     async function getPontos() {
-    // instacia datas
-      const instaciaData = new Date()
-      const dia = instaciaData.getDate()
-      const mes = instaciaData.getMonth() + 1
-      const ano = instaciaData.getFullYear()
-      const dataString = (dia+'-'+mes+'-'+ano).toString()
+      // instacia datas
+        const instaciaData = new Date()
+        const dia = instaciaData.getDate()
+        const mes = instaciaData.getMonth() + 1
+        const ano = instaciaData.getFullYear()
+        const dataString = (dia+'-'+mes+'-'+ano).toString()
+    
+        //instanciando o banco de dados firebase
+        const db = firebase.firestore();
+    
+        //colletion usuarios
+        const DocumentRefUsuario = db.collection('usuarios').doc(props.uid.toString());
+        const docUsuario = await DocumentRefUsuario.get();
+    
+        //colletion ponto
+        const DocumentRefPontos = db.collection('pontos')
+        const docPonto = await DocumentRefPontos
+        .where('uid_usuario', '==', docUsuario.data().uid)
+        .where('data', '==', dataString)
+        .get()
 
-      //instanciando o banco de dados firebase
-      const db = firebase.firestore();
-
-      //colletion usuarios
-      const DocumentRefUsuario = db.collection('usuarios').doc(props.uid.toString());
-      const docUsuario = await DocumentRefUsuario.get();
-
-      //colletion ponto
-      const DocumentRefPontos = db.collection('pontos')
-      const docPonto = await DocumentRefPontos
-      .where('uid_usuario', '==', docUsuario.data().uid)
-      .where('data', '==', dataString)
-      .get()
-
-      docPonto.forEach(item => {
-        //console.log('item: ',item.data())
-        if (item.data().status === 'inicio_expediente') {
-          setPontoDia('inicio_expediente', item.data().ponto.toDate())
-        } else if (item.data().status === 'inicio_intervalo') {
-          setPontoDia('inicio_intervalo', item.data().ponto.toDate())
-        }
-
-      })
-
+        docPonto.forEach(item => {
+          let _item = item.data().ponto.toDate()
+          setRegistros([...registros, _item])
+          
+        })
     }
+
+      getPontos()
+
+  }, [])
+
+  
+
+    
+
 
   //funções
   function abrirModalBatidaPonto() {
@@ -64,7 +69,7 @@ export function BodyPonto(props) {
     setIsModalBatidaPontoOpen(false);
   }
 
-       
+        
   //ficar atualizando a dataAtual a cada 1 segundo
   setTimeout(()=>{
     setDataAtual(new Date());
@@ -92,12 +97,19 @@ export function BodyPonto(props) {
 
       <ContentRegistrosDia>
       <div>
+        <p>Inicio Expediente T</p>
+     
+      
+      </div>
+
+
+      <div>
           <p>Inicio Expediente</p>
           {
-            pontoDia.inicio_expediente !== '' ? (
+            a !== '' ? (
               <>
                 <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(pontoDia.inicio_expediente) }</strong>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(a) }</strong>
               </>
             ) : (
               <>
@@ -110,10 +122,10 @@ export function BodyPonto(props) {
         <div>
           <p>Inicio Intervalo</p>
           {
-            pontoDia.inicio_intervalo !== '' ? (
+            a !== '' ? (
               <>
                 <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(pontoDia.inicio_intervalo) }</strong>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(a) }</strong>
               </>
             ) : (
               <>
@@ -126,10 +138,10 @@ export function BodyPonto(props) {
         <div>
           <p>Fim Intervalo</p>
           {
-            pontoDia.fim_intervalo !== '' ? (
+            a !== '' ? (
               <>
                 <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(pontoDia.fim_intervalo) }</strong>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(a) }</strong>
               </>
             ) : (
               <>
@@ -142,10 +154,10 @@ export function BodyPonto(props) {
         <div>
           <p>Fim Expediente</p>
           {
-            pontoDia.fim_expediente !== '' ? (
+            a !== '' ? (
               <>
                 <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(pontoDia.fim_expediente) }</strong>
+                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(a) }</strong>
               </>
             ) : (
               <>
