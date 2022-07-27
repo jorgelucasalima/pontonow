@@ -45,16 +45,15 @@ export function BodyPonto(props) {
         .where('data', '==', dataString)
         .get()
 
+        const arrayRegistros = []
         docPonto.forEach(item => {
-          let arrayPonto = []
-          arrayPonto.push({
+          arrayRegistros.push({
             status: item.data().status,
             ponto: item.data().ponto.toDate(),
           })
-          setRegistros(...registros, arrayPonto)
         })
 
-        
+        setRegistros(arrayRegistros)
     }
 
 
