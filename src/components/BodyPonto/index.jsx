@@ -15,14 +15,15 @@ export function BodyPonto(props) {
   //console.log('REGISTRO: ', registros)
 
 
-
-
   //usando para não dá erro na renderização do html
   const [a, setA] = useState('')
 
   useEffect( () => {
-    
-    async function getPontos() {
+    getPontos()
+  }, [])
+
+  
+  async function getPontos() {
       // instacia datas
         const instaciaData = new Date()
         const dia = instaciaData.getDate()
@@ -45,19 +46,12 @@ export function BodyPonto(props) {
         .get()
 
         docPonto.forEach(item => {
-          let _item = item.data().ponto.toDate()
-          setRegistros([...registros, _item])
-          
+          //console.log('ITEM: ', item.data())
+          //IMPLEMENTAR O PONTO PARA IR PARA O STATE E VISUALIZAR NA TELA
+          //setRegistros([...registros, {...item.data().ponto.toDate(), } ])
         })
+        
     }
-
-      getPontos()
-
-  }, [])
-
-  
-
-    
 
 
   //funções
