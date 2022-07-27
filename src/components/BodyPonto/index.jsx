@@ -39,7 +39,7 @@ export function BodyPonto(props) {
         .get()
         .then(snapshot => {
           if (snapshot.empty) {
-            console.log('Não há registros');
+            //console.log('Não há registros');
           } else {
             const dados = []
             snapshot.forEach(doc => {
@@ -55,7 +55,7 @@ export function BodyPonto(props) {
     }
     getPontos()
     
-  }, [registros])
+  }, [dataAtual])
 
   
   
@@ -104,15 +104,15 @@ export function BodyPonto(props) {
 
         <div>
           <p>Inicio Intervalo</p>
-          {registros.find(registro => registro.status === 'inicio_expediente') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
+          {registros.find(registro => registro.status === 'inicio_intervalo') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
         </div>
         <div>
           <p>Fim Intervalo</p>
-          {registros.find(registro => registro.status === 'inicio_expediente') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
+          {registros.find(registro => registro.status === 'fim_intervalo') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
         </div>
         <div>
           <p>Fim Expediente</p>
-          {registros.find(registro => registro.status === 'inicio_expediente') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
+          {registros.find(registro => registro.status === 'fim_expediente') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
         </div>
         
       </ContentRegistrosDia>
