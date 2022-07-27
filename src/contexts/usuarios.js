@@ -20,7 +20,8 @@ function UsuarioProvider({ children }) {
             nome: item.data().nome,
             email: item.data().email,
             cargo: item.data().cargo,
-            status: item.data().status
+            status: item.data().status,
+            isAdmin: item.data().isAdmin
           })
         })
 

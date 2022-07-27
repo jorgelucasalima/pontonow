@@ -46,10 +46,14 @@ export function BodyPonto(props) {
         .get()
 
         docPonto.forEach(item => {
-          //console.log('ITEM: ', item.data())
-          //IMPLEMENTAR O PONTO PARA IR PARA O STATE E VISUALIZAR NA TELA
-          //setRegistros([...registros, {...item.data().ponto.toDate(), } ])
+          let arrayPonto = []
+          arrayPonto.push({
+            status: item.data().status,
+            ponto: item.data().ponto.toDate(),
+          })
+          setRegistros(...registros, arrayPonto)
         })
+
         
     }
 

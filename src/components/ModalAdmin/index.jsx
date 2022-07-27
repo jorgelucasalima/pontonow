@@ -13,6 +13,7 @@ export function ModalAdmin(props) {
   const [senha, setSenha] = useState('')
   const [cargo, setCargo] = useState('')
   const [status, setStatus] = useState('')
+  const [isAdmin, setIsAdmin] = useState('')
 
 
   //funções
@@ -25,7 +26,8 @@ export function ModalAdmin(props) {
         nome: nome,
         email: email,
         cargo: cargo,
-        status: status
+        status: status,
+        isAdmin: isAdmin
       })
       .then(() => {
         toast.success('Usuário cadastrado com sucesso!')
@@ -35,6 +37,7 @@ export function ModalAdmin(props) {
         setSenha('')
         setCargo('')
         setStatus('')
+        setIsAdmin('')
       })
     })
     .catch((error) => {  
@@ -98,6 +101,17 @@ export function ModalAdmin(props) {
             <option selected="selected" hidden>- Selecione o status -</option>
             <option value="Ativo">Ativo</option>
             <option value="Inativo">Inativo</option>
+          </select>
+          
+          <select 
+            name="isAdmin" 
+            id="isAdmin"
+            value={isAdmin}
+            onChange={e => setIsAdmin(e.target.value)}  
+          >
+            <option selected="selected" hidden>Administrador</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
           </select>
 
           <button onClick={cadastrarFuncionarioFirebase}>Cadastrar</button>

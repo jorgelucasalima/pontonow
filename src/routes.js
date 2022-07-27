@@ -4,6 +4,7 @@ import { BatidaPonto } from "./pages/BatidaPonto";
 import { Login } from "./pages/Login";
 import { LoginAdmin } from "./pages/LoginAdmin";
 import { Administrativo } from "./pages/Administrativo";
+import { ViewUser } from "./pages/Administrativo/view";
 
 export default function Rotas() {
   return(
@@ -12,6 +13,7 @@ export default function Rotas() {
       <Route path="/loginadmin" element={<LoginAdmin/>}/>
       <Route path="/batidaponto" element={<BatidaPonto/>}/>
       <Route path="/admin" element={<Administrativo/>}/>
+      <Route path="/view/:id" element={<ViewUser/>}/>
     </Routes>
   )
 }

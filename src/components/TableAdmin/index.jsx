@@ -3,6 +3,7 @@ import { FiEdit, FiEye, FiTrash } from "react-icons/fi";
 import { useContext, useState } from "react";
 import {ModalAdmin} from "../ModalAdmin"
 import { UsuariosContext } from "../../contexts/usuarios";
+import { Link } from 'react-router-dom'
  
 export function TableAdmin(props) {
 
@@ -48,7 +49,7 @@ export function TableAdmin(props) {
               <td>{usuario.cargo}</td>
               <td>{usuario.status}</td>
               <td>
-                <a href=""><FiEye/></a>
+                <Link to={`/view/${usuario.uid}`}><FiEye/></Link>
                 <a href=""><FiEdit/></a>
                 <a href=""><FiTrash/></a>
               </td>
