@@ -14,16 +14,9 @@ export function BodyPonto(props) {
 
   //console.log('REGISTRO: ', registros)
 
-
-  //usando para não dá erro na renderização do html
-  const [a, setA] = useState('')
-
   useEffect( () => {
-    getPontos()
-  }, [])
 
-  
-  async function getPontos() {
+    async function getPontos() {
       // instacia datas
         const instaciaData = new Date()
         const dia = instaciaData.getDate()
@@ -33,7 +26,7 @@ export function BodyPonto(props) {
     
         //instanciando o banco de dados firebase
         const db = firebase.firestore();
-    
+
         //colletion usuarios
         const DocumentRefUsuario = db.collection('usuarios').doc(props.uid.toString());
         const docUsuario = await DocumentRefUsuario.get();
@@ -44,17 +37,28 @@ export function BodyPonto(props) {
         .where('uid_usuario', '==', docUsuario.data().uid)
         .where('data', '==', dataString)
         .get()
-
-        const arrayRegistros = []
-        docPonto.forEach(item => {
-          arrayRegistros.push({
-            status: item.data().status,
-            ponto: item.data().ponto.toDate(),
-          })
+        .then(snapshot => {
+          if (snapshot.empty) {
+            console.log('Não há registros');
+          } else {
+            const dados = []
+            snapshot.forEach(doc => {
+              dados.push({
+                status: doc.data().status,
+                ponto: doc.data().ponto,
+              })
+            });
+            setRegistros(dados)
+          }
         })
-
-        setRegistros(arrayRegistros)
+        
     }
+    getPontos()
+    
+  }, [registros])
+
+  
+  
 
 
   //funções
@@ -93,76 +97,22 @@ export function BodyPonto(props) {
       </ContentBatida>
 
       <ContentRegistrosDia>
-      <div>
-        <p>Inicio Expediente T</p>
-     
-      
-      </div>
-
-
-      <div>
+        <div>
           <p>Inicio Expediente</p>
-          {
-            a !== '' ? (
-              <>
-                <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(a) }</strong>
-              </>
-            ) : (
-              <>
-                <FiAlertCircle className='alerta'/>
-                <a href=""></a>
-              </>
-            )
-          }
+          {registros.find(registro => registro.status === 'inicio_expediente') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
         </div>
+
         <div>
           <p>Inicio Intervalo</p>
-          {
-            a !== '' ? (
-              <>
-                <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(a) }</strong>
-              </>
-            ) : (
-              <>
-                <FiAlertCircle className='alerta'/>
-                <a href=""></a>
-              </>
-            )
-          }
+          {registros.find(registro => registro.status === 'inicio_expediente') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
         </div>
         <div>
           <p>Fim Intervalo</p>
-          {
-            a !== '' ? (
-              <>
-                <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(a) }</strong>
-              </>
-            ) : (
-              <>
-                <FiAlertCircle className='alerta'/>
-                <a href=""></a>
-              </>
-            )
-          }
+          {registros.find(registro => registro.status === 'inicio_expediente') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
         </div>
         <div>
           <p>Fim Expediente</p>
-          {
-            a !== '' ? (
-              <>
-                <FiCheckCircle className='check'/>
-                <strong>{ new Intl.DateTimeFormat('pt-BR', {hour: 'numeric', minute:'numeric', second:'numeric' }).format(a) }</strong>
-              </>
-            ) : (
-              <>
-                <FiAlertCircle className='alerta'/>
-                <a href=""></a>
-              </>
-            )
-          }
+          {registros.find(registro => registro.status === 'inicio_expediente') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
         </div>
         
       </ContentRegistrosDia>
