@@ -107,10 +107,13 @@ export function BodyPonto(props) {
                   registro.status === 'fim_expediente'    ? 
                   <>  
                     <p>Registrado</p>
-                    <strong>{new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(registro.ponto)}</strong>
+                    <strong>
+                      <FiCheckCircle className='check'/>
+                      {new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(registro.ponto)}
+                    </strong>
                   </>
                    : 
-                  <FiAlertCircle size={30} color="#FF0000" />
+                  <FiAlertCircle className='alerta'/>
                 }
               </div>
             ))
