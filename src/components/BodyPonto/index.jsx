@@ -3,7 +3,7 @@ import { FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import { ModalBatidaPonto } from '../ModalBatidaPonto';
 import { useState, useEffect } from 'react';
 import firebase from '../../services/apifirebase'
-import { doc } from '@firebase/firestore';
+
 
 
 export function BodyPonto(props) {
@@ -48,7 +48,7 @@ export function BodyPonto(props) {
             ponto: doc.data().ponto.toDate(),
           })
         })
-        //console.log('DADOS:  ', dados)
+        //console.log('DADOS:   ', dados)
         setRegistros(dados)
         
           
@@ -93,21 +93,28 @@ export function BodyPonto(props) {
 
       <ContentRegistrosDia>
         <>
-        {registros.map((registro) => (
-          <div key={registro.status}>
-            { registro.status === 'inicio_expediente' || 
-              registro.status === 'inicio_intervalo'  || 
-              registro.status === 'fim_intervalo'     || 
-              registro.status === 'fim_expediente'    ? 
-              <>  
-                <p>Registrado</p>
-                <strong>{new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(registro.ponto)}</strong>
-              </>
-               : 
-              <FiAlertCircle size={30} color="#FF0000" />
+          {registros.sort(function(a, b){
+            if (a.ponto < b.ponto) {
+              return -1;  
+            } else {
+              return true;
             }
-          </div>
-        ))}
+            }).map((registro) => (
+              <div key={registro.status}>
+                { registro.status === 'inicio_expediente' || 
+                  registro.status === 'inicio_intervalo'  || 
+                  registro.status === 'fim_intervalo'     || 
+                  registro.status === 'fim_expediente'    ? 
+                  <>  
+                    <p>Registrado</p>
+                    <strong>{new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(registro.ponto)}</strong>
+                  </>
+                   : 
+                  <FiAlertCircle size={30} color="#FF0000" />
+                }
+              </div>
+            ))
+          }         
         </>
       </ContentRegistrosDia>
     </Container>
