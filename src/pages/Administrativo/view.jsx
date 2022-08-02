@@ -38,6 +38,7 @@ export function ViewUser() {
           <div>
             <h1>Funcionário:</h1>
             <h2>{usuario.nome}</h2>
+            <h1>Cargo:</h1>
             <h2>{usuario.cargo}</h2>
           </div>
         </ContentViewUser>

@@ -3,6 +3,7 @@ import { FiCheckCircle, FiAlertCircle } from "react-icons/fi";
 import { ModalBatidaPonto } from '../ModalBatidaPonto';
 import { useState, useEffect } from 'react';
 import firebase from '../../services/apifirebase'
+import { doc } from '@firebase/firestore';
 
 
 export function BodyPonto(props) {
@@ -10,9 +11,11 @@ export function BodyPonto(props) {
   //estados
   const [isModalBatidaPontoOpen, setIsModalBatidaPontoOpen] = useState(false);
   const [dataAtual, setDataAtual] = useState(new Date())
+  const [eventClick, setEventClick] = useState(0)
   const [registros, setRegistros] = useState([])
 
-  //console.log('REGISTRO: ', registros)
+
+  //console.log('REGISTROR: ', registros)
 
   useEffect( () => {
 
@@ -36,30 +39,23 @@ export function BodyPonto(props) {
         const docPonto = await DocumentRefPontos
         .where('uid_usuario', '==', docUsuario.data().uid)
         .where('data', '==', dataString)
-        .get()
-        .then(snapshot => {
-          if (snapshot.empty) {
-            //console.log('Não há registros');
-          } else {
-            const dados = []
-            snapshot.forEach(doc => {
-              dados.push({
-                status: doc.data().status,
-                ponto: doc.data().ponto,
-              })
-            });
-            setRegistros(dados)
-          }
-        })
+        .get()    
         
+        let dados = []
+        docPonto.forEach(doc => {
+          dados.push({
+            status: doc.data().status,
+            ponto: doc.data().ponto.toDate(),
+          })
+        })
+        //console.log('DADOS:  ', dados)
+        setRegistros(dados)
+        
+          
     }
     getPontos()
     
-  }, [dataAtual])
-
-  
-  
-
+  }, [])
 
   //funções
   function abrirModalBatidaPonto() {
@@ -69,7 +65,6 @@ export function BodyPonto(props) {
   function fecharModalBatidaPonto() {
     setIsModalBatidaPontoOpen(false);
   }
-
         
   //ficar atualizando a dataAtual a cada 1 segundo
   setTimeout(()=>{
@@ -97,26 +92,24 @@ export function BodyPonto(props) {
       </ContentBatida>
 
       <ContentRegistrosDia>
-        <div>
-          <p>Inicio Expediente</p>
-          {registros.find(registro => registro.status === 'inicio_expediente') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
-        </div>
-
-        <div>
-          <p>Inicio Intervalo</p>
-          {registros.find(registro => registro.status === 'inicio_intervalo') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
-        </div>
-        <div>
-          <p>Fim Intervalo</p>
-          {registros.find(registro => registro.status === 'fim_intervalo') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
-        </div>
-        <div>
-          <p>Fim Expediente</p>
-          {registros.find(registro => registro.status === 'fim_expediente') ? <FiCheckCircle size={30}/> : <FiAlertCircle size={30}/>}
-        </div>
-        
+        <>
+        {registros.map((registro) => (
+          <div key={registro.status}>
+            { registro.status === 'inicio_expediente' || 
+              registro.status === 'inicio_intervalo'  || 
+              registro.status === 'fim_intervalo'     || 
+              registro.status === 'fim_expediente'    ? 
+              <>  
+                <p>Registrado</p>
+                <strong>{new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(registro.ponto)}</strong>
+              </>
+               : 
+              <FiAlertCircle size={30} color="#FF0000" />
+            }
+          </div>
+        ))}
+        </>
       </ContentRegistrosDia>
     </Container>
-    
   )
 }
