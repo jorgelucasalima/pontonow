@@ -5,6 +5,7 @@ import { Login } from "./pages/Login";
 import { LoginAdmin } from "./pages/LoginAdmin";
 import { Administrativo } from "./pages/Administrativo";
 import { ViewUser } from "./pages/Administrativo/view";
+import { EditUser } from "./pages/Administrativo/edit";
 
 export default function Rotas() {
   return(
@@ -14,6 +15,7 @@ export default function Rotas() {
       <Route path="/batidaponto" element={<BatidaPonto/>}/>
       <Route path="/admin" element={<Administrativo/>}/>
       <Route path="/view/:id" element={<ViewUser/>}/>
+      <Route path="/edit/:id" element={<EditUser/>}/>
     </Routes>
   )
 }

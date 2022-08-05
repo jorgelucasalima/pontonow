@@ -25,6 +25,9 @@ export const ContentViewUser = styled.div`
   }
 `;
 
+export const ContentEditUser = styled.div`
+`
+
 export const ContentViewPontos = styled.div`
   display: flex;
   align-items: center;

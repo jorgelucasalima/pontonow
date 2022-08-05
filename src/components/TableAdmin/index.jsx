@@ -50,7 +50,7 @@ export function TableAdmin(props) {
               <td>{usuario.status}</td>
               <td>
                 <Link to={`/view/${usuario.uid}`}><FiEye/></Link>
-                <a href=""><FiEdit/></a>
+                <Link to={`/edit/${usuario.uid}`}><FiEdit/></Link>
                 <a href=""><FiTrash/></a>
               </td>
             </tr>
