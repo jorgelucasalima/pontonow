@@ -16,6 +16,13 @@ export const ContentViewUser = styled.div`
   color: var(--texto-escuro);
   padding: 2rem;
   border-radius: 0.25rem;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+  h3 {
+    margin-bottom: 0.25rem;
+  }
 `;
 
 export const ContentViewPontos = styled.div`

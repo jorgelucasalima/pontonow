@@ -23,7 +23,7 @@ export function ModalBatidaPonto(props) {
     const DocumentRefUsuario = db.collection('usuarios').doc(props.uid.toString());
     const docUsuario = await DocumentRefUsuario.get();
 
-    //colletion ponto
+    //colletion ponto / verifica se é o usuário logado e a data é hoje
     const DocumentRefPontos = db.collection('pontos')
     const docPonto = await DocumentRefPontos
     .where('uid_usuario', '==', docUsuario.data().uid)
@@ -31,7 +31,7 @@ export function ModalBatidaPonto(props) {
     .get()
 
    
-    // verificando se o usuario ja batiu o ponto no dia de acordo array de pontos do dia
+    // verificando se o usuario ja bateu o ponto no dia de acordo array de pontos do dia
     if(docPonto.docs.length === 0) {
       await db.collection('pontos')
         .add({

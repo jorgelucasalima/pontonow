@@ -4,8 +4,6 @@ import { ModalBatidaPonto } from '../ModalBatidaPonto';
 import { useState, useEffect } from 'react';
 import firebase from '../../services/apifirebase'
 
-
-
 export function BodyPonto(props) {
 
   //estados
@@ -14,8 +12,7 @@ export function BodyPonto(props) {
   const [eventClick, setEventClick] = useState(0)
   const [registros, setRegistros] = useState([])
 
-
-  //console.log('REGISTROR: ', registros)
+  //console.log('PROPS: ', props)
 
   useEffect( () => {
 
@@ -48,7 +45,7 @@ export function BodyPonto(props) {
             ponto: doc.data().ponto.toDate(),
           })
         })
-        //console.log('DADOS:   ', dados)
+        //console.log('DADOS:  ', dados)
         setRegistros(dados)
         
           
@@ -87,7 +84,7 @@ export function BodyPonto(props) {
       
       <ContentBatida>
         <h1>{ (new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(dataAtual)) }</h1>
-        <button onClick={abrirModalBatidaPonto}>REGISTRAR PONTO</button>
+        <button onClick={abrirModalBatidaPonto} >REGISTRAR PONTO</button>
         <a href=""></a>
       </ContentBatida>
 

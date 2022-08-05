@@ -36,10 +36,9 @@ export function ViewUser() {
       <Container>
         <ContentViewUser>
           <div>
-            <h1>Funcionário:</h1>
-            <h2>{usuario.nome}</h2>
-            <h1>Cargo:</h1>
-            <h2>{usuario.cargo}</h2>
+            <h1>Dados Pessoais:</h1>
+            <h3>Colaborador: {usuario.nome}</h3>
+            <h3>Cargo: {usuario.cargo}</h3>
           </div>
         </ContentViewUser>
         <ContentViewPontos>
