@@ -37,16 +37,28 @@ export function EditUser() {
         <ContentEditUser>
           <div>
             <h1>Dados Pessoais:</h1>
-            <h3>Colaborador: {usuario.nome}</h3>
-            <h3>Cargo: {usuario.cargo}</h3>
-            <h3>Data Nascimento</h3>
-            <h3>Cidade</h3>
-            <h3>Estado-UF</h3>
-            <h3>CPF:</h3>
-            <h3>PIS:</h3>
-            <h3>CTPS:</h3>
-            <h3>RG:</h3>
-            <h3>TUDO AQUI VAI SER INPUT</h3>
+            <input type="text" placeholder={usuario.nome}/>
+            <input type="text" placeholder={usuario.cargo}/>
+            <input type="text" placeholder="CPF"/>
+            <input type="text" placeholder="PIS"/>
+            <input type="text" placeholder="CTPS"/>
+            <input type="text" placeholder="RG"/>
+            <label htmlFor="">Data Nascimento</label>
+            <input type="date"/>
+            <input type="text" placeholder="Cidade"/>
+            <select name="Estado" id="">
+              <option value="">UF</option>
+              <option value="Maranhão">Maranhão</option>
+              <option value="Piauí">Piauí</option>
+              <option value="Ceará">Ceará</option>
+              <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+              <option value="Paraíba">Paraíba</option>
+              <option value="Pernambuco">Pernambuco</option>
+              <option value="Alagoas">Alagoas</option>
+              <option value="Sergipe">Sergipe</option>
+              <option value="Bahia">Bahia</option>
+            </select>
+
           </div>
         </ContentEditUser>
       </Container>

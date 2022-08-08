@@ -26,6 +26,28 @@ export const ContentViewUser = styled.div`
 `;
 
 export const ContentEditUser = styled.div`
+  
+  background: var(--fundo-header);
+  color: var(--texto-escuro);
+  padding: 2rem;
+  border-radius: 0.25rem;
+
+  input, select {
+    width: 100%;
+    padding: 0 1.2rem;
+    height: 3rem;
+    border-radius: 0.25rem;
+    border: 1px solid #d7d7d7;
+    color: var(--texto-escuro);
+    //  font-weight: bold;
+    font-size: 1.25rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+  }
 `
 
 export const ContentViewPontos = styled.div`
