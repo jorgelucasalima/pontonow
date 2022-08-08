@@ -37,7 +37,9 @@ export function EditUser() {
         <ContentEditUser>
           <div>
             <h1>Dados Pessoais:</h1>
+            <label htmlFor="">Nome:</label>
             <input type="text" placeholder={usuario.nome}/>
+            <label htmlFor="">Cargo:</label>
             <input type="text" placeholder={usuario.cargo}/>
             <input type="text" placeholder="CPF"/>
             <input type="text" placeholder="PIS"/>
