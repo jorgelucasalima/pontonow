@@ -7,6 +7,14 @@ import { Header } from "../../components/Header";
 
 export function EditUser() {
 
+  const [cpf, setCpf] = useState('');
+  const [rg, setRg] = useState('');
+  const [pis, setPis] = useState('');
+  const [ctps, setCtps] = useState('');
+  const [dataNascimento, setDataNascimento] = useState('');
+  const [cidadeNascimento, setCidadeNascimento] = useState('');
+  const [estadoNascimento, setEstadoNascimento] = useState('');
+
   const {id} = useParams();
 
   const [usuario, setUsuario] = useState({});
@@ -29,6 +37,34 @@ export function EditUser() {
     loadUser();
   },[id])
 
+  async function atualizarDadosUsuario(e){
+    e.preventDefault();
+    const user = {
+      cpf,
+      rg,
+      pis,
+      ctps,
+      dataNascimento,
+      cidadeNascimento,
+      estadoNascimento
+    }
+    await firebase.firestore().collection('usuarios')
+    .doc(id)
+    .update(user)
+    .then(() => {
+      alert('Usuário atualizado com sucesso!');
+    }).catch(error => {
+      console.log(error);
+    }).finally(() => {
+      setCpf('');
+      setRg('');
+      setPis('');
+      setCtps('');
+      setDataNascimento('');
+      setCidadeNascimento('');
+      setEstadoNascimento('');
+    })
+  }
 
   return (
     <UsuarioProvider>
@@ -38,18 +74,25 @@ export function EditUser() {
           <div>
             <h1>Dados Pessoais:</h1>
             <label htmlFor="">Nome:</label>
-            <input type="text" placeholder={usuario.nome}/>
+              <input type="text" placeholder={usuario.nome}  />
             <label htmlFor="">Cargo:</label>
-            <input type="text" placeholder={usuario.cargo}/>
-            <input type="text" placeholder="CPF"/>
-            <input type="text" placeholder="PIS"/>
-            <input type="text" placeholder="CTPS"/>
-            <input type="text" placeholder="RG"/>
+              <input type="text" placeholder={usuario.cargo}/>
+            <label htmlFor="">CPF:</label>
+              <input type="text" value={cpf} />
+            <label htmlFor="">RG:</label>
+              <input type="text"/>
+            <label htmlFor="">PIS:</label>
+              <input type="text"/>
+            <label htmlFor="">CTPS:</label>
+              <input type="text"/>
             <label htmlFor="">Data Nascimento</label>
-            <input type="date"/>
-            <input type="text" placeholder="Cidade"/>
+              <input type="date"/>
+            <label htmlFor="">Cidade Nascimento</label>
+              <input type="text" placeholder="Cidade"/>
+
+            <label htmlFor="">UF - Nascimento</label>
             <select name="Estado" id="">
-              <option value="">UF</option>
+              <option value="">-</option>
               <option value="Maranhão">Maranhão</option>
               <option value="Piauí">Piauí</option>
               <option value="Ceará">Ceará</option>
@@ -60,6 +103,8 @@ export function EditUser() {
               <option value="Sergipe">Sergipe</option>
               <option value="Bahia">Bahia</option>
             </select>
+
+            <button onClick={atualizarDadosUsuario}>Atualizar</button>
 
           </div>
         </ContentEditUser>

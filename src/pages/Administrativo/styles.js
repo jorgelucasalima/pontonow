@@ -48,6 +48,23 @@ export const ContentEditUser = styled.div`
   h1 {
     margin-bottom: 1rem;
   }
+
+  button {
+    width: 100%;
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    background: var(--laranga-button);
+    border: 0;
+    padding: 0 2rem;
+    height: 4rem;
+    border-radius: 0.25rem;
+    margin-top: 1rem;
+   
+    transition: filter 0.2s;
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
 `
 
 export const ContentViewPontos = styled.div`
