@@ -6,6 +6,29 @@ export const Container = styled.div`
   padding: 0.25rem 1rem;
   margin-top: 1rem;
 `
+export const ContentPdf = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 1rem;
+`
+
+export const ButtonPdf = styled.div`
+
+  align-items: center;
+
+  button{
+    padding: 0.50rem;
+    border: 0;
+    width: 4rem;
+
+    background: var(--laranga-button);
+    font-size: 20px;
+    border-radius: 0.25rem;
+    
+  }
+`
 
 export const ContentViewUser = styled.div`
   display: flex;
