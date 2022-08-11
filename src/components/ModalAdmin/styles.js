@@ -10,24 +10,24 @@ export const Container = styled.div`
   input, select {
     width: 100%;
     padding: 0 1.2rem;
-    height: 3rem;
+    height: 2rem;
     border-radius: 0.25rem;
     border: 1px solid #d7d7d7;
     color: var(--texto-escuro);
     //  font-weight: bold;
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin-top: 0.3rem;
     margin-bottom: 0.5rem;
   }
 
   button {
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: #FFFFFF;
     background: var(--laranga-button);
     border: 0;
     padding: 0 2rem;
-    height: 4rem;
+    height: 3rem;
     border-radius: 0.25rem;
     margin-top: 1rem;
    

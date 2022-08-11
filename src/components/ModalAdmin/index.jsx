@@ -11,6 +11,10 @@ export function ModalAdmin(props) {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
+  const [cpf, setCpf] = useState('')
+  const [rg, setRg] = useState('')
+  const [pis, setPis] = useState('')
+  const [ctps, setCtps] = useState('')
   const [cargo, setCargo] = useState('')
   const [status, setStatus] = useState('')
   const [isAdmin, setIsAdmin] = useState('')
@@ -25,6 +29,10 @@ export function ModalAdmin(props) {
         uid: value.user.uid,
         nome: nome,
         email: email,
+        cpf: cpf,
+        rg: rg,
+        pis: pis,
+        ctps: ctps,
         cargo: cargo,
         status: status,
         isAdmin: isAdmin
@@ -34,6 +42,10 @@ export function ModalAdmin(props) {
         props.onRequestClose()
         setNome('')
         setEmail('')
+        setCpf('')
+        setRg('')
+        setPis('')
+        setCtps('')
         setSenha('')
         setCargo('')
         setStatus('')
@@ -50,7 +62,7 @@ export function ModalAdmin(props) {
 
   }
 
-
+//diminuir input e incluir novos
   return(
     <Modal
       isOpen={props.isOpen}
@@ -63,7 +75,7 @@ export function ModalAdmin(props) {
           <h1>Cadastrar Funcionário</h1>
           <input 
             type="text" 
-            placeholder="Nome"
+            placeholder="Nome Completo"
             value={nome}
             onChange={e => setNome(e.target.value)}
           />
@@ -79,13 +91,38 @@ export function ModalAdmin(props) {
             value={senha}
             onChange={e => setSenha(e.target.value)}   
           />
+          <input 
+            type="text" 
+            placeholder="CPF" 
+            value={cpf}
+            onChange={e => setCpf(e.target.value)}
+          />
+          <input 
+            type="text" 
+            placeholder="RG" 
+            value={rg}
+            onChange={e => setRg(e.target.value)}
+          />
+          <input 
+            type="text" 
+            placeholder="PIS" 
+            value={pis}
+            onChange={e => setPis(e.target.value)}
+          />
+          <input 
+            type="text" 
+            placeholder="CTPS" 
+            value={ctps}
+            onChange={e => setCtps(e.target.value)}
+          />
+
           <select 
             name="cargo" 
             id="cargo"
             value={cargo}
             onChange={e => setCargo(e.target.value)}
           >
-            <option selected="selected" hidden>- Selecione o cargo -</option>
+            <option selected="selected" hidden>Cargo</option>
             <option value="Desenvolvedor">Desenvolvedor</option>
             <option value="Secretária">Secretária</option>
             <option value="Administrativo">Administrativo</option>
@@ -98,7 +135,7 @@ export function ModalAdmin(props) {
             value={status}
             onChange={e => setStatus(e.target.value)}  
           >
-            <option selected="selected" hidden>- Selecione o status -</option>
+            <option selected="selected" hidden>Status</option>
             <option value="Ativo">Ativo</option>
             <option value="Inativo">Inativo</option>
           </select>
