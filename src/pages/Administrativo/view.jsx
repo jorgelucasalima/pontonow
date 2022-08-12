@@ -1,16 +1,18 @@
 import UsuarioProvider from "../../contexts/usuarios";
 import { ContentViewPontos, ContentViewUser, Container, ButtonPdf, ContentPdf } from "./styles";
-import {useParams} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import firebase from '../../services/apifirebase'
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
-import {FiDownload} from 'react-icons/fi'
+import {FiDownload, FiEdit} from 'react-icons/fi'
 
 export function ViewUser() {
 
   const {id} = useParams();
 
   const [usuario, setUsuario] = useState({});
+  const [pontos, setPontos] = useState([]);
+  //console.log('pontos:' , pontos)
 
   useEffect(()=>{
     async function loadUser(){
@@ -33,6 +35,21 @@ export function ViewUser() {
     }
     loadUser();
   },[id])
+
+
+  useEffect(()=> {
+    async function loadPontosUser() {
+      await firebase.firestore().collection('pontos')
+      .where('uid_usuario', '==', id)
+      .get()
+      .then(response => {
+        setPontos(response.docs.map(doc => doc.data()));
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+    loadPontosUser();
+  }, [id])
 
 
   return (
@@ -58,9 +75,37 @@ export function ViewUser() {
             <h3>Cargo: {usuario.cargo}</h3>
           </div>
         </ContentViewUser>
+
         <ContentViewPontos>
           <div>
             <h1>Pontos:</h1>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Pontos</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    pontos.sort(function(a, b){
+                      if (a.ponto < b.ponto) {
+                        return -1;  
+                      } else {
+                        return true;
+                      }
+                      }).map(ponto => (
+                        <tr key={ponto.uid_usuario}>
+                          <td>{ponto.data}</td>
+                          <td>{new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(ponto.ponto)}</td>
+                          <td> <Link to={`/edit/${ponto.uid_usuario}`}><FiEdit/></Link></td>
+                        </tr>
+                       ))
+
+                  }
+                </tbody>
+              </table>
           </div>
         </ContentViewPontos>
       </Container>
