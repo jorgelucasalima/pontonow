@@ -97,11 +97,11 @@ export function ViewUser() {
                       } else {
                         return true;
                       }
-                      }).map(ponto => (
-                        <tr key={ponto.uid_usuario}>
-                          <td>{ponto.data}</td>
-                          <td>{new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(ponto.ponto)}</td>
-                          <td> <Link to={`/edit/${ponto.uid_usuario}`}><FiEdit/></Link></td>
+                      }).map(item => (
+                        <tr key={item.uid_usuario}>
+                          <td>{item.data}</td>
+                          <td>{(new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(item.ponto.toDate()))}</td>
+                          <td> <Link to={``}><FiEdit/></Link></td>
                         </tr>
                        ))
                   }
