@@ -1,9 +1,10 @@
 import UsuarioProvider from "../../contexts/usuarios";
 import {Container, ContentEditUser } from "./styles";
-import {useParams} from 'react-router-dom';
+import {useParams, useNavigate } from 'react-router-dom';
 import firebase from '../../services/apifirebase'
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
+import { toast } from "react-toastify"
 
 export function EditUser() {
 
@@ -17,11 +18,12 @@ export function EditUser() {
   const [isAdmin, setIsAdmin] = useState('');
   
   
-
+  const rota = useNavigate();
   const {id} = useParams();
 
   const [usuario, setUsuario] = useState({});
 
+  //carregar usuario de acordo id
   useEffect(()=>{
     async function loadUser(){
       await firebase.firestore().collection('usuarios')
@@ -63,7 +65,9 @@ export function EditUser() {
     .doc(id)
     .update(user)
     .then(() => {
-      alert('Usuário atualizado com sucesso!');
+      toast.success('Editado com Sucesso.')
+      rota('/admin' )
+
     }).catch(error => {
       console.log(error);
     }).finally(() => {
@@ -134,7 +138,7 @@ export function EditUser() {
           </select>
            
 
-            <button onClick={atualizarDadosUsuario}>Atualizar</button>
+          <button onClick={atualizarDadosUsuario}>Atualizar</button>
 
           </div>
         </ContentEditUser>
