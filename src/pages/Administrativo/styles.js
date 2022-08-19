@@ -91,15 +91,44 @@ export const ContentEditUser = styled.div`
 `
 
 export const ContentViewPontos = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
   background: var(--fundo-header);
   color: var(--texto-escuro);
   margin-top: 1rem;
   padding: 2rem;
   border-radius: 0.25rem;
+
+  table {
+    width: 100%;
+    align-items: center;
+    margin-top: 1rem;
+    
+    th {
+      color: var(--texto);
+      font-weight: bold;
+      padding: 1rem 2rem;
+      text-align: center;
+      line-height: 1.5rem;
+    }
+
+    td {
+      padding: 0.3rem 0.5rem;
+      border: 1px solid;
+      border-color: aliceblue;
+      background: var(--fundo-header);
+      color: var(--texto-escuro);
+      border-radius: 0.25rem;
+      text-align: center;
+
+      a {
+        text-decoration: none;
+        margin-left: 0.25rem;
+        cursor: pointer;
+        color: var(--texto-escuro);
+        font-size: 20px;
+      }
+    }
+  }
 `
 
 

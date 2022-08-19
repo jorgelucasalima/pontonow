@@ -83,7 +83,7 @@ export function ViewUser() {
                 <thead>
                   <tr>
                     <th>Data</th>
-                    <th>Pontos</th>
+                    <th>Ponto</th>
                     <th>Ações</th>
                   </tr>
                 </thead>
@@ -102,7 +102,6 @@ export function ViewUser() {
                           <td> <Link to={`/edit/${ponto.uid_usuario}`}><FiEdit/></Link></td>
                         </tr>
                        ))
-
                   }
                 </tbody>
               </table>
