@@ -14,6 +14,7 @@ export function ViewUser() {
   const [pontos, setPontos] = useState([]);
   //console.log('pontos:' , pontos)
 
+  //carrega dados do usuario
   useEffect(()=>{
     async function loadUser(){
       await firebase.firestore().collection('usuarios')
@@ -37,6 +38,7 @@ export function ViewUser() {
   },[id])
 
 
+  //carrega dados dos pontos
   useEffect(()=> {
     async function loadPontosUser() {
       await firebase.firestore().collection('pontos')

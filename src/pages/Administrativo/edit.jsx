@@ -7,13 +7,16 @@ import { Header } from "../../components/Header";
 
 export function EditUser() {
 
+  const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
   const [rg, setRg] = useState('');
   const [pis, setPis] = useState('');
   const [ctps, setCtps] = useState('');
-  const [dataNascimento, setDataNascimento] = useState('');
-  const [cidadeNascimento, setCidadeNascimento] = useState('');
-  const [estadoNascimento, setEstadoNascimento] = useState('');
+  const [cargo, setCargo] = useState('');
+  const [status, setStatus] = useState('');
+  const [isAdmin, setIsAdmin] = useState('');
+  
+  
 
   const {id} = useParams();
 
@@ -25,7 +28,13 @@ export function EditUser() {
       .doc(id)
       .get({
         nome: usuario.nome,
-        cargo: usuario.cargo
+        cargo: usuario.cargo,
+        cpf: usuario.cpf,
+        rg: usuario.rg,
+        pis: usuario.pis,
+        ctps: usuario.ctps,
+        status: usuario.status,
+        isAdmin: usuario.isAdmin
       })
       .then(response => {
         setUsuario(response.data());
@@ -40,14 +49,16 @@ export function EditUser() {
   async function atualizarDadosUsuario(e){
     e.preventDefault();
     const user = {
+      nome,
+      cargo,
       cpf,
       rg,
       pis,
       ctps,
-      dataNascimento,
-      cidadeNascimento,
-      estadoNascimento
+      status,
+      isAdmin
     }
+
     await firebase.firestore().collection('usuarios')
     .doc(id)
     .update(user)
@@ -60,9 +71,10 @@ export function EditUser() {
       setRg('');
       setPis('');
       setCtps('');
-      setDataNascimento('');
-      setCidadeNascimento('');
-      setEstadoNascimento('');
+      setCargo('');
+      setStatus('');
+      setIsAdmin('');
+      setNome('');
     })
   }
 
@@ -74,35 +86,53 @@ export function EditUser() {
           <div>
             <h1>Dados Pessoais:</h1>
             <label htmlFor="">Nome:</label>
-              <input type="text" placeholder={usuario.nome}  />
-            <label htmlFor="">Cargo:</label>
-              <input type="text" placeholder={usuario.cargo}/>
-            <label htmlFor="">CPF:</label>
-              <input type="text" value={cpf} />
-            <label htmlFor="">RG:</label>
-              <input type="text"/>
-            <label htmlFor="">PIS:</label>
-              <input type="text"/>
-            <label htmlFor="">CTPS:</label>
-              <input type="text"/>
-            <label htmlFor="">Data Nascimento</label>
-              <input type="date"/>
-            <label htmlFor="">Cidade Nascimento</label>
-              <input type="text" placeholder="Cidade"/>
+            <input type="text" placeholder={usuario.nome}  />
 
-            <label htmlFor="">UF - Nascimento</label>
-            <select name="Estado" id="">
-              <option value="">-</option>
-              <option value="Maranhão">Maranhão</option>
-              <option value="Piauí">Piauí</option>
-              <option value="Ceará">Ceará</option>
-              <option value="Rio Grande do Norte">Rio Grande do Norte</option>
-              <option value="Paraíba">Paraíba</option>
-              <option value="Pernambuco">Pernambuco</option>
-              <option value="Alagoas">Alagoas</option>
-              <option value="Sergipe">Sergipe</option>
-              <option value="Bahia">Bahia</option>
+            <select 
+              name="cargo" 
+              id="cargo"
+              value={cargo}
+              onChange={e => setCargo(e.target.value)}
+            >
+              <option selected="selected" hidden>Cargo</option>
+              <option value="Desenvolvedor">Desenvolvedor</option>
+              <option value="Secretária">Secretária</option>
+              <option value="Administrativo">Administrativo</option>
+              <option value="Estágiario">Estágiario</option>
             </select>
+
+            <label htmlFor="">CPF:</label>
+              <input type="text" value={cpf} onChange={e => setCpf(e.target.value)}/>
+            <label htmlFor="" >RG:</label>
+              <input type="text" value={rg} onChange={e => setRg(e.target.value)}/>
+            <label htmlFor="">PIS:</label>
+              <input type="text" value={pis} onChange={e => setPis(e.target.value)}/>
+            <label htmlFor="">CTPS:</label>
+              <input type="text" value={ctps} onChange={e => setCtps(e.target.value)}/>
+
+            <h3>Configurações:</h3>
+            <select 
+            name="status" 
+            id="status"
+            value={status}
+            onChange={e => setStatus(e.target.value)}  
+          >
+            <option selected="selected" hidden>Status</option>
+            <option value="Ativo">Ativo</option>
+            <option value="Inativo">Inativo</option>
+          </select>
+          
+          <select 
+            name="isAdmin" 
+            id="isAdmin"
+            value={isAdmin}
+            onChange={e => setIsAdmin(e.target.value)}  
+          >
+            <option selected="selected" hidden>Administrador</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+          </select>
+           
 
             <button onClick={atualizarDadosUsuario}>Atualizar</button>
 
