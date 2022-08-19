@@ -86,7 +86,7 @@ export function EditUser() {
           <div>
             <h1>Dados Pessoais:</h1>
             <label htmlFor="">Nome:</label>
-            <input type="text" placeholder={usuario.nome}  />
+            <input type="text" placeholder={usuario.nome} value={nome} onChange={e => setNome(e.target.value)}/>
 
             <select 
               name="cargo" 
