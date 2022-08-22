@@ -9,7 +9,6 @@ export function BodyPonto(props) {
   //estados
   const [isModalBatidaPontoOpen, setIsModalBatidaPontoOpen] = useState(false);
   const [dataAtual, setDataAtual] = useState(new Date())
-  const [eventClick, setEventClick] = useState(0)
   const [registros, setRegistros] = useState([])
 
   //console.log('PROPS: ', props)
@@ -46,9 +45,7 @@ export function BodyPonto(props) {
           })
         })
         //console.log('DADOS:  ', dados)
-        setRegistros(dados)
-        
-          
+        setRegistros(dados)  
     }
     getPontos()
     
@@ -84,7 +81,7 @@ export function BodyPonto(props) {
       
       <ContentBatida>
         <h1>{ (new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(dataAtual)) }</h1>
-        <button onClick={abrirModalBatidaPonto} >REGISTRAR PONTO</button>
+        <button onClick={abrirModalBatidaPonto}>REGISTRAR PONTO</button>
         <a href=""></a>
       </ContentBatida>
 
