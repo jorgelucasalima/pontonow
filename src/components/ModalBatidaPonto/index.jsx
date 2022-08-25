@@ -30,6 +30,7 @@ export function ModalBatidaPonto(props) {
     .where('data', '==', dataString)
     .get()
 
+    //console.log(props)
    
     // verificando se o usuario ja bateu o ponto no dia de acordo array de pontos do dia
     if(docPonto.docs.length === 0) {

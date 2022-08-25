@@ -85,6 +85,7 @@ export function ViewUser() {
                 <thead>
                   <tr>
                     <th>Data</th>
+                    <th>Status</th>
                     <th>Ponto</th>
                     <th>Ações</th>
                   </tr>
@@ -100,8 +101,9 @@ export function ViewUser() {
                       }).map(item => (
                         <tr key={item.uid_usuario}>
                           <td>{item.data}</td>
+                          <td>{item.status}</td>
                           <td>{(new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(item.ponto.toDate()))}</td>
-                          <td> <Link to={``}><FiEdit/></Link></td>
+                          <td> <Link to={`/edit-ponto/`}><FiEdit/></Link></td>
                         </tr>
                        ))
                   }
