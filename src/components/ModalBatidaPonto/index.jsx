@@ -2,9 +2,11 @@ import {Container} from './styles'
 import Modal from 'react-modal'
 import firebase from '../../services/apifirebase'
 import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 
 export function ModalBatidaPonto(props) {
+
 
   //funções
   async function registrarPonto() {
@@ -30,13 +32,26 @@ export function ModalBatidaPonto(props) {
     .where('data', '==', dataString)
     .get()
 
-    //console.log(props)
-   
+    //consulta os documentos do dia de acordo o usuario e com status inicio expediente
+    const docPontoInicioExpediente = await DocumentRefPontos
+    .where('uid_usuario', '==', docUsuario.data().uid)
+    .where('data', '==', dataString)
+    .where('status', '==', 'inicio_expediente')
+    .get()
+
+    docPontoInicioExpediente.docs.forEach(doc => {
+      console.log('ID: ',doc.id)
+    })
+
+
+
+
     // verificando se o usuario ja bateu o ponto no dia de acordo array de pontos do dia
     if(docPonto.docs.length === 0) {
       await db.collection('pontos')
         .add({
           uid_usuario: docUsuario.data().uid,
+          uid_documento: '',
           nome_usuario: docUsuario.data().nome,
           email_usuario: docUsuario.data().email,
           data: dataString,
