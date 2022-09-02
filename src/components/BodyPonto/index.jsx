@@ -87,7 +87,6 @@ export function BodyPonto(props) {
       <ContentBatida>
         <h1>{ (new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(dataAtual)) }</h1>
         <button onClick={abrirModalBatidaPonto}>REGISTRAR PONTO</button>
-        <a href=""></a>
       </ContentBatida>
 
       <ContentRegistrosDia>

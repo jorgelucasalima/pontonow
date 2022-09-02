@@ -13,9 +13,9 @@ export const ContentTexto = styled.div`
 
 export const ContentBatida = styled.div`
 
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.60fr 0.50fr;
   align-items: center;
-  justify-content: space-between;
 
   background: var(--fundo-header);
   margin-top: 2rem;
@@ -24,9 +24,9 @@ export const ContentBatida = styled.div`
 
   h1 {
     font-size: 3rem;
+    margin-bottom: 0.25rem;
   }
   
-
   button {
     background: var(--laranga-button);
     font-size: 1rem;
@@ -34,7 +34,7 @@ export const ContentBatida = styled.div`
     color: #FFFFFF;
     border: 0;
     padding: 0 2rem;
-    height: 3rem;
+    height: 3.5rem;
     border-radius: 0.25rem;
     transition: filter 0.2s;
 
