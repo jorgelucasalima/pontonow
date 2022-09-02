@@ -11,6 +11,7 @@ export function BodyPonto(props) {
   const [dataAtual, setDataAtual] = useState(new Date())
   const [registros, setRegistros] = useState([])
 
+  //console.log(registros)
   //console.log('PROPS: ', props)
 
   useEffect( () => {
@@ -42,6 +43,7 @@ export function BodyPonto(props) {
           dados.push({
             status: doc.data().status,
             ponto: doc.data().ponto.toDate(),
+            uid_usuario: doc.data().uid_usuario,
           })
         })
         //console.log('DADOS:  ', dados)
@@ -86,33 +88,33 @@ export function BodyPonto(props) {
       </ContentBatida>
 
       <ContentRegistrosDia>
-        <>
-          {registros.sort(function(a, b){
-            if (a.ponto < b.ponto) {
-              return -1;  
-            } else {
-              return true;
-            }
-            }).map((registro) => (
-              <div key={registro.status}>
-                { registro.status === 'inicio_expediente' || 
-                  registro.status === 'inicio_intervalo'  || 
-                  registro.status === 'fim_intervalo'     || 
-                  registro.status === 'fim_expediente'    ? 
-                  <>  
-                    <p>Registrado</p>
-                    <strong>
-                      <FiCheckCircle className='check'/>
-                      {new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(registro.ponto)}
-                    </strong>
-                  </>
-                   : 
-                  <FiAlertCircle className='alerta'/>
-                }
-              </div>
-            ))
-          }         
-        </>
+          {
+              <>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Status</th>
+                      <th>Hora</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {registros.sort(function(a, b){
+                    if (a.ponto < b.ponto) {
+                      return -1;  
+                    } else {
+                      return true;
+                    }
+                    }).map( (registro) => (
+                      <tr key={registro.status}>
+                        <td>Registrado</td>
+                        <td>{new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(registro.ponto)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                
+              </>
+          }
       </ContentRegistrosDia>
     </Container>
   )

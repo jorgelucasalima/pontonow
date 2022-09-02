@@ -40,7 +40,7 @@ export function ModalBatidaPonto(props) {
     .get()
 
     docPontoInicioExpediente.docs.forEach(doc => {
-      console.log('ID: ',doc.id)
+      //console.log('ID: ',doc.id)
     })
 
 
