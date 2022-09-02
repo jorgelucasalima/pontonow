@@ -45,27 +45,30 @@ export const ContentBatida = styled.div`
 `
 
 export const ContentRegistrosDia = styled.div`
-  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
 
-  table {
-    width: 100%;
-    border-spacing: 0 0.5rem;
-    align-items: center;
+  div {
+    background: var(--fundo-header);
+    padding: 1.5rem 1rem;
+    border-radius: 0.25rem;
     
-    th {
-      color: var(--texto);
-      font-weight: bold;
-      padding: 1rem 2rem;
-      text-align: center;
-      line-height: 1.5rem;
+    p{
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
     }
-    td {
-      padding: 1rem 0.50rem;
-      border: 0;
-      background: var(--fundo-header);
-      color: var(--texto-escuro);
-      border-radius: 0.25rem;
-      text-align: center;
+
+    .check {
+      font-size: 1.9rem;
+      margin-right: 0.50rem;
+      color: var(--check-verde);
     }
+
+    strong{
+      font-size: 2rem;
+    }
+
   }
 `

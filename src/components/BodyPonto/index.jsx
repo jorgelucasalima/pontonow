@@ -4,6 +4,7 @@ import { ModalBatidaPonto } from '../ModalBatidaPonto';
 import { useState, useEffect } from 'react';
 import firebase from '../../services/apifirebase'
 
+
 export function BodyPonto(props) {
 
   //estados
@@ -11,7 +12,8 @@ export function BodyPonto(props) {
   const [dataAtual, setDataAtual] = useState(new Date())
   const [registros, setRegistros] = useState([])
 
-  //console.log(registros)
+
+  //console.log()
   //console.log('PROPS: ', props)
 
   useEffect( () => {
@@ -89,31 +91,26 @@ export function BodyPonto(props) {
 
       <ContentRegistrosDia>
           {
-              <>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Status</th>
-                      <th>Hora</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {registros.sort(function(a, b){
-                    if (a.ponto < b.ponto) {
-                      return -1;  
-                    } else {
-                      return true;
-                    }
-                    }).map( (registro) => (
-                      <tr key={registro.status}>
-                        <td>Registrado</td>
-                        <td>{new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(registro.ponto)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                
-              </>
+            <>
+              {registros.sort(function(a, b){
+                if (a.ponto < b.ponto) {
+                  return -1;  
+                } else {
+                  return true;
+                }
+                  }).map((registro) => (
+                    <div key={registro.status}>
+                        <>  
+                          <p>Registrado</p>
+                          <strong>
+                            <FiCheckCircle className='check'/>
+                            {new Intl.DateTimeFormat('pt-BR', { hour: 'numeric', minute:'numeric', second:'numeric' }).format(registro.ponto)}
+                          </strong>
+                        </>
+                    </div>
+                  ))
+              }         
+            </>
           }
       </ContentRegistrosDia>
     </Container>
