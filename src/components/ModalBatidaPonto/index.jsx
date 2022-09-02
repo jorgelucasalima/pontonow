@@ -60,7 +60,8 @@ export function ModalBatidaPonto(props) {
         })
         .then(() => {
           props.onRequestClose()
-          toast.success('Ponto registrado com sucesso!')
+          //toast.success('Ponto registrado com sucesso!')
+          window.location.reload();
         })
         .catch(() => {
           toast.error('Erro ao registrar ponto!')
@@ -77,7 +78,8 @@ export function ModalBatidaPonto(props) {
           })
           .then(() => {
             props.onRequestClose()
-            toast.success('Ponto registrado com sucesso!')
+            //toast.success('Ponto registrado com sucesso!')
+            window.location.reload();
           })
           .catch(() => {
             toast.error('Erro ao registrar ponto!')
@@ -94,7 +96,8 @@ export function ModalBatidaPonto(props) {
           })
           .then(() => {
             props.onRequestClose()
-            toast.success('Ponto registrado com sucesso!')
+            //toast.success('Ponto registrado com sucesso!')
+            window.location.reload();
           })
           .catch(() => {
             toast.error('Erro ao registrar ponto!')
@@ -111,7 +114,8 @@ export function ModalBatidaPonto(props) {
         })
         .then(() => {
           props.onRequestClose()
-          toast.success('Ponto registrado com sucesso!')
+          //toast.success('Ponto registrado com sucesso!')
+          window.location.reload();
         })
         .catch(() => {
           toast.error('Erro ao registrar ponto!')

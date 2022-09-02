@@ -53,7 +53,8 @@ export function BodyPonto(props) {
     }
     getPontos()
     
-  }, [])
+  }, [props.uid])
+
 
   //funções
   function abrirModalBatidaPonto() {
